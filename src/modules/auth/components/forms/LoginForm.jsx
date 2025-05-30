@@ -1,10 +1,17 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import useLogin from "../../hooks/useLogin";
 
 export default function LoginForm() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const { mutate, isLoading, error } = useLogin();
+  const navigate = useNavigate();
+  
+  const { mutate, isLoading, error } = useLogin({
+    onSuccess: () => {
+      navigate("/");
+    }
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();

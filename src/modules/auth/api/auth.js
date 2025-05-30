@@ -1,10 +1,6 @@
-export const login = async (credentials) => {
-  const response = await fetch("http://localhost:5000/api/v1/auth", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(credentials),
-  });
+import axios from '../../shared/api/axiosInstance';
 
-  if (!response.ok) throw new Error("Error al iniciar sesión");
-  return await response.json();
+export const login = async (credentials) => {
+  const { data } = await axios.post('/auth', credentials);
+  return data;
 };

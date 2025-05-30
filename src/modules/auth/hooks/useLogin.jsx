@@ -3,7 +3,7 @@ import { useSetAtom } from "jotai";
 import { authAtom } from "../atoms/authAtom";
 import { login } from "../api/auth";
 
-export default function useLogin() {
+export default function useLogin({ onSuccess }) {
   const setAuth = useSetAtom(authAtom);
 
   return useMutation({
@@ -14,7 +14,7 @@ export default function useLogin() {
         token: data.token,
         user: data.user,
       });
-      localStorage.setItem("token", data.token);
+      if (onSuccess) onSuccess();
     }
   });
 }
