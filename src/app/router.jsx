@@ -7,10 +7,19 @@ const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
 };
 
+const PublicRoute = ({ children }) => {
+  return isAuthenticated() ? <Navigate to="/" /> : children;
+};
+
+
 const router = createBrowserRouter([
   {
     path: "/login",
-    element: <LoginPage />,
+    element: (
+      <PublicRoute>
+        <LoginPage />
+      </PublicRoute>
+    ),
   },
   {
     path: "/",
