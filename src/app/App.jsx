@@ -1,5 +1,5 @@
 import { RouterProvider } from "react-router-dom";
-import { QueryClientProvider, QueryClient } from "react-query";
+import { QueryClientProvider, QueryClient } from "@tanstack/react-query";
 import { Provider as JotaiProvider } from "jotai";
 import router from "./router";
 
