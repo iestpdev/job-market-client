@@ -7,7 +7,7 @@ export const HomePage = () => {
     const navigate = useNavigate();
 
     const handleLogout = () => {
-        localStorage.removeItem("token");
+        localStorage.removeItem("auth");
         setAuth({ isAuthenticated: false, token: null, user: null });
         navigate("/login");
     };

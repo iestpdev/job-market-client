@@ -14,7 +14,6 @@ export default function useLogin({ onSuccess }) {
         token: data.token,
         user: data.user,
       });
-      localStorage.setItem("token", data.token);
       if (onSuccess) onSuccess();
     }
   });
