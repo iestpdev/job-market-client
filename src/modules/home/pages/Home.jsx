@@ -1,21 +1,10 @@
-import { useSetAtom } from 'jotai';
-import { useNavigate } from 'react-router-dom';
-import { authAtom } from '../../auth/atoms/authAtom';
+import Navbar from '../../shared/components/navbar/Navbar';
 
 export const HomePage = () => {
-    const setAuth = useSetAtom(authAtom);
-    const navigate = useNavigate();
-
-    const handleLogout = () => {
-        localStorage.removeItem("auth");
-        setAuth({ isAuthenticated: false, token: null, user: null });
-        navigate("/login");
-    };
-
     return (
         <div>
-            <h1>Home</h1>
-            <button onClick={handleLogout}>Cerrar sesión</button>
+            <Navbar />
+            <p>Habla pe causa</p>
         </div>
     );
 };

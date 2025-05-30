@@ -1,0 +1,29 @@
+:root {
+    /* Base */
+    --color-blanco: #FFFFFF;
+    --color-blanco-suave: #F5F5F5;
+    --color-negro: #000000;
+    --color-negro-transparente: rgba(0, 0, 0, 0.5);
+    --color-gris: #777676;
+
+    /* Azules / Celestes */
+    --color-azul-claro: #E9F1FA;
+    --color-celeste-claro: #D4F1F9;
+    --color-celeste-intermedio: #89CFF0;
+    --color-azul-pastel: #6BAED8;
+    --color-azul: #0358CB;
+    --color-azul-oscuro: #2B6CB0;
+    --color-azul-marino: #1E3A8A;
+    --color-azul-noche: #002060;
+
+    /* Estados / acciones */
+    --color-verde: #38A169;
+    --color-verde-claro: #C6F6D5;
+    --color-rojo: #E53E3E;
+    --color-rojo-claro: #FED7D7;
+    --color-amarillo: #ECC94B;
+
+    /* Hover / borders */
+    --color-borde-gris: #E0E0E0;
+    --color-fondo-hover: #F0F4F8;
+}
