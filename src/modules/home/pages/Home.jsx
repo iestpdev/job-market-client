@@ -1,10 +1,10 @@
-import Navbar from '../../shared/components/navbar/Navbar';
+import Layout from '../../shared/components/layout/Layout';
+import OffersPage from '../../offers/pages/Offers';
 
 export const HomePage = () => {
     return (
-        <div>
-            <Navbar />
-            <p>Habla pe causa</p>
-        </div>
+        <Layout>
+            <OffersPage />
+        </Layout>
     );
 };

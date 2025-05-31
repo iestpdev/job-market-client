@@ -1,0 +1,18 @@
+.offers-page {
+    display: flex;
+    gap: 1rem;
+}
+
+.offer-list-container {
+    width: 30%;
+    background-color: var(--color-blanco);
+    padding: 1rem;
+    border: 1px solid var(--color-borde-gris);
+}
+
+.offer-details-container {
+    flex: 1;
+    background-color: var(--color-blanco);
+    padding: 1rem;
+    border: 1px solid var(--color-borde-gris);
+}

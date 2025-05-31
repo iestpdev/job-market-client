@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { isAuthenticated } from "../modules/shared/utils/authUtils";
-import LoginPage from "../modules/auth/pages/login";
+import LoginPage from "../modules/auth/pages/Login";
 import { HomePage } from "../modules/home/pages/home";
 
 const ProtectedRoute = ({ children }) => {
@@ -11,6 +11,7 @@ const PublicRoute = ({ children }) => {
   return isAuthenticated() ? <Navigate to="/" /> : children;
 };
 
+const NotFoundPage = () => <h1>404 - Página no encontrada</h1>;
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,19 @@ const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
+/*
+    {
+    path: "/publicar",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <h1>Página de Publicar Oferta</h1>
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+*/
+  { path: "*", element: <NotFoundPage /> }
 ]);
 
 export default router;
