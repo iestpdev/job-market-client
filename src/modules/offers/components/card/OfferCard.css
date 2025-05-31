@@ -1,0 +1,26 @@
+.offer-card {
+    border: 1px solid var(--color-borde-gris);
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    background-color: var(--color-blanco-suave);
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+.offer-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.offer-card h3 {
+    margin: 0 0 0.5rem;
+    color: var(--color-azul);
+    font-size: 1.2rem;
+}
+
+.offer-card p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+    color: var(--color-gris);
+}
