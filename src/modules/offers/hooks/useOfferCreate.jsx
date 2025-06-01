@@ -24,10 +24,21 @@ export const useOfferCreate = () => {
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: type === "checkbox" ? checked : value,
-        }));
+
+        if (name === "sueldo") {
+            const newSueldo = Number(value); 
+            setFormData((prev) => ({
+                ...prev,
+                [name]: newSueldo,
+                adHonorem: newSueldo === 0 ? false : prev.adHonorem,
+            }));
+
+        } else {
+            setFormData((prev) => ({
+                ...prev,
+                [name]: type === "checkbox" ? checked : value,
+            }));
+        }
     };
 
     const handleSubmit = async (e) => {
