@@ -1,7 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { isAuthenticated } from "../modules/shared/utils/authUtils";
 import LoginPage from "../modules/auth/pages/Login";
+import Layout from "../modules/shared/components/layout/Layout";
 import { HomePage } from "../modules/home/pages/home";
+import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
 
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
@@ -26,22 +28,20 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <ProtectedRoute>
-        <HomePage />
+        <Layout><HomePage/></Layout>
       </ProtectedRoute>
     ),
   },
-/*
-    {
-    path: "/publicar",
+  {
+    path: "/createOffer",
     element: (
       <ProtectedRoute>
         <Layout>
-          <h1>Página de Publicar Oferta</h1>
+          <OffersCreatePage />
         </Layout>
       </ProtectedRoute>
     ),
   },
-*/
   { path: "*", element: <NotFoundPage /> }
 ]);
 

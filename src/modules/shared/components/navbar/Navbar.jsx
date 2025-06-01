@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { Link, useNavigate } from "react-router-dom";
 import { authAtom } from "../../../auth/atoms/authAtom";
-import { usePermissions } from "../../../shared/hooks/usePermissions";
+import usePermissions from "../../../shared/hooks/usePermissions";
 import { useState } from "react";
 import "./Navbar.css";
 

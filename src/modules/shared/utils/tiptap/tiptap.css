@@ -1,0 +1,12 @@
+.tiptap-editor {
+    border: 1px solid var(--color-borde-gris);
+    border-radius: 8px;
+    padding: 0.5rem;
+    min-height: 100px;
+    margin-bottom: 1rem;
+}
+
+.tiptap-editor:focus-within {
+    border-color: var(--color-azul);
+    box-shadow: 0 0 0 2px rgba(3, 88, 203, 0.2);
+}
