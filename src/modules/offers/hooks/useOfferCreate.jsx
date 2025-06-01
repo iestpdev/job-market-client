@@ -6,7 +6,7 @@ import { useTiptapEditor } from "../../shared/utils/tiptap/tiptapConfig";
 
 export const useOfferCreate = () => {
     const auth = useAtomValue(authAtom);
-    const companyId = auth?.user?.id;
+    const companyId = auth?.user?.companyId;
 
     const [formData, setFormData] = useState({
         titulo: "",
@@ -21,8 +21,6 @@ export const useOfferCreate = () => {
     const descripcionEditor = useTiptapEditor(formData.descripcion);
     const requisitosEditor = useTiptapEditor(formData.requisitos);
     const beneficiosEditor = useTiptapEditor(formData.beneficios);
-
-    console.log("Descripción Editor:", descripcionEditor);
 
     const handleChange = (e) => {
         const { name, value, type, checked } = e.target;

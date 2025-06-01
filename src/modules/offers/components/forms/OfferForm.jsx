@@ -1,4 +1,13 @@
-const OfferForm = ({ formData, descripcionEditor, requisitosEditor, beneficiosEditor, handleChange, handleSubmit }) => {
+import { EditorContent } from "@tiptap/react";
+
+const OfferForm = ({
+    formData,
+    descripcionEditor,
+    requisitosEditor,
+    beneficiosEditor,
+    handleChange,
+    handleSubmit,
+}) => {
     return (
         <form onSubmit={handleSubmit} style={{ maxWidth: "600px", margin: "auto" }}>
             <div>
@@ -14,9 +23,11 @@ const OfferForm = ({ formData, descripcionEditor, requisitosEditor, beneficiosEd
 
             <div>
                 <label>Descripción:</label>
-                <div className="tiptap-editor">
-                    <div ref={descripcionEditor.ref} />
-                </div>
+                {descripcionEditor && (
+                    <div className="tiptap-editor">
+                        <EditorContent editor={descripcionEditor} />
+                    </div>
+                )}
             </div>
 
             <div>
@@ -54,16 +65,20 @@ const OfferForm = ({ formData, descripcionEditor, requisitosEditor, beneficiosEd
 
             <div>
                 <label>Requisitos:</label>
-                <div className="tiptap-editor">
-                    <div ref={requisitosEditor.ref} />
-                </div>
+                {requisitosEditor && (
+                    <div className="tiptap-editor">
+                        <EditorContent editor={requisitosEditor} />
+                    </div>
+                )}
             </div>
 
             <div>
                 <label>Beneficios:</label>
-                <div className="tiptap-editor">
-                    <div ref={beneficiosEditor.ref} />
-                </div>
+                {beneficiosEditor && (
+                    <div className="tiptap-editor">
+                        <EditorContent editor={beneficiosEditor} />
+                    </div>
+                )}
             </div>
 
             <button type="submit">Crear Oferta</button>
