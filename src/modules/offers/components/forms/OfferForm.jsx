@@ -1,4 +1,5 @@
 import { EditorContent } from "@tiptap/react";
+import Toolbar from "../../../shared/components/tiptap/Toolbar";
 
 const OfferForm = ({
     formData,
@@ -25,6 +26,7 @@ const OfferForm = ({
                 <label>Descripción:</label>
                 {descripcionEditor && (
                     <div className="tiptap-editor">
+                        <Toolbar editor={descripcionEditor} />
                         <EditorContent editor={descripcionEditor} />
                     </div>
                 )}
@@ -35,6 +37,7 @@ const OfferForm = ({
                 <input
                     type="number"
                     name="sueldo"
+                    min={0}
                     value={formData.sueldo}
                     onChange={handleChange}
                 />
@@ -67,6 +70,7 @@ const OfferForm = ({
                 <label>Requisitos:</label>
                 {requisitosEditor && (
                     <div className="tiptap-editor">
+                        <Toolbar editor={requisitosEditor} />
                         <EditorContent editor={requisitosEditor} />
                     </div>
                 )}
@@ -76,6 +80,7 @@ const OfferForm = ({
                 <label>Beneficios:</label>
                 {beneficiosEditor && (
                     <div className="tiptap-editor">
+                        <Toolbar editor={beneficiosEditor} />
                         <EditorContent editor={beneficiosEditor} />
                     </div>
                 )}
