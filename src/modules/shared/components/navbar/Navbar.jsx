@@ -23,7 +23,7 @@ export default function Navbar() {
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <div className="navbar-logo">IESTP JOBS</div>
+                <Link to="/" className="navbar-logo">IESTP JOBS</Link>
                 {canPublishOffers  && (
                         <Link to="/createOffer" className="navbar-link">
                             Nueva oferta

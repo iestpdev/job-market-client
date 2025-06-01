@@ -56,6 +56,40 @@ const OfferForm = ({
             )}
 
             <div>
+                <label>Viáticos:</label>
+                <input
+                    type="number"
+                    name="viaticos"
+                    min={0}
+                    value={formData.viaticos}
+                    onChange={handleChange}
+                />
+            </div>
+
+            <div>
+                <label>Bonos:</label>
+                <input
+                    type="number"
+                    name="bonos"
+                    min={0}
+                    value={formData.bonos}
+                    onChange={handleChange}
+                />
+            </div>
+
+            <div>
+                <label>Número de Vacantes:</label>
+                <input
+                    type="number"
+                    name="numVacantes"
+                    value={formData.numVacantes}
+                    onChange={handleChange}
+                    min={0}
+                    max={255}
+                />
+            </div>
+
+            <div>
                 <label>Fecha de Cierre:</label>
                 <input
                     type="datetime-local"
@@ -84,6 +118,36 @@ const OfferForm = ({
                         <EditorContent editor={beneficiosEditor} />
                     </div>
                 )}
+            </div>
+
+            <div>
+                <label>Contacto:</label>
+                <input
+                    type="text"
+                    name="contacto"
+                    value={formData.contacto}
+                    onChange={handleChange}
+                />
+            </div>
+
+            <div>
+                <label>Correo Electrónico:</label>
+                <input
+                    type="email"
+                    name="correo"
+                    value={formData.correo}
+                    onChange={handleChange}
+                />
+            </div>
+
+            <div>
+                <label>Teléfono:</label>
+                <input
+                    type="phone"
+                    name="telefono"
+                    value={formData.telefono}
+                    onChange={handleChange}
+                />
             </div>
 
             <button type="submit">Crear Oferta</button>

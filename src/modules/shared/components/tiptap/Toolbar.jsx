@@ -16,6 +16,7 @@ const Toolbar = ({ editor }) => {
         <div className="toolbar">
             {/* Botón Negrita */}
             <button
+                type="button"
                 onClick={() => handleCommand("toggleBold")}
                 disabled={!editor.can().chain().focus().toggleBold().run()}
                 className={editor.isActive("bold") ? "is-active" : ""}
@@ -26,6 +27,7 @@ const Toolbar = ({ editor }) => {
 
             {/* Botón Cursiva */}
             <button
+                type="button"
                 onClick={() => handleCommand("toggleItalic")}
                 disabled={!editor.can().chain().focus().toggleItalic().run()}
                 className={editor.isActive("italic") ? "is-active" : ""}
@@ -36,6 +38,7 @@ const Toolbar = ({ editor }) => {
 
             {/* Botón Lista Desordenada */}
             <button
+                type="button"
                 onClick={() => handleCommand("toggleBulletList")}
                 className={editor.isActive("bulletList") ? "is-active" : ""}
                 title="Lista Desordenada"
@@ -45,6 +48,7 @@ const Toolbar = ({ editor }) => {
 
             {/* Botón Lista Ordenada */}
             <button
+                type="button"
                 onClick={() => handleCommand("toggleOrderedList")}
                 className={editor.isActive("orderedList") ? "is-active" : ""}
                 title="Lista Ordenada"
@@ -54,6 +58,7 @@ const Toolbar = ({ editor }) => {
 
             {/* Botón Encabezado 1 */}
             <button
+                type="button"
                 onClick={() => handleCommand("setHeading", { level: 1 })}
                 className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
                 title="Encabezado 1"
