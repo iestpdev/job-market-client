@@ -10,6 +10,7 @@ const useOffers = () => {
         const fetchOffers = async () => {
             try {
                 const data = await getAll();
+                console.log(data);
                 setOffers(data);
             } catch (err) {
                 setError("Error al cargar las ofertas.");

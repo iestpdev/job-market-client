@@ -9,7 +9,6 @@ const OffersPage = () => {
     const [selectedOfferId, setSelectedOfferId] = useState(null);
     const { offers, loading: offersLoading, error: offersError } = useOffers();
     const { offer, loading: detailsLoading, error: detailsError } = useOfferDetails(selectedOfferId);
-    console.log(offer);
 
     if (offersLoading) return <p>Cargando ofertas...</p>;
     if (offersError) return <p>{offersError}</p>;
