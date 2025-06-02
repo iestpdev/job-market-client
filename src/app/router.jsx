@@ -4,6 +4,8 @@ import LoginPage from "../modules/auth/pages/Login";
 import Layout from "../modules/shared/components/layout/Layout";
 import { HomePage } from "../modules/home/pages/home";
 import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
+import CandidaciesPage from "../modules/candidacies/pages/Candidacies";
+import StudentDetailsPage from "../modules/students/pages/Student";
 
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
@@ -40,6 +42,26 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Layout>
           <OffersCreatePage />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/candidacies",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <CandidaciesPage />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/candidacies/:id",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <StudentDetailsPage />
         </Layout>
       </ProtectedRoute>
     ),
