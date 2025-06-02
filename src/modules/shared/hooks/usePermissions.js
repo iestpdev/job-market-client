@@ -11,6 +11,8 @@ export default function usePermissions() {
     return {
         isCompany,
         isStudent,
+        companyId: auth?.user?.companyId,
+        studentId: auth?.user?.studentId,
         canPublishOffers: isCompany,
         canViewCandidacies: isCompany,
         canViewPostulations: isStudent,

@@ -1,10 +1,11 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { isAuthenticated } from "../modules/shared/utils/authUtils";
 import LoginPage from "../modules/auth/pages/Login";
-import Layout from "../modules/shared/components/layout/Layout";
+import Layout from "../modules/shared/layouts/Layout";
 import { HomePage } from "../modules/home/pages/home";
 import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
-import CandidaciesScreen from "../screens/company/your-candidates/CandidaciesScreen";
+import YourCandidaciesScreen from "../screens/company/your-candidates/YourCandidaciesScreen";
+import CompanyEditPage from "../modules/companies/pages/CompanyEdit/CompanyEdit";
 
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
@@ -50,7 +51,17 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <CandidaciesScreen />
+          <YourCandidaciesScreen />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/company/edit/:id",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <CompanyEditPage />
         </Layout>
       </ProtectedRoute>
     ),
