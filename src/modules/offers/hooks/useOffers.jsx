@@ -1,25 +1,42 @@
 import { useState, useEffect } from "react";
-import { getAll } from "../api/offers";
+import { getAll, getAllByCompanyId } from "../api/offers";
+import { useAtomValue } from "jotai";
+import { authAtom } from "../../auth/atoms/authAtom";
 
 const useOffers = () => {
     const [offers, setOffers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
+    const auth = useAtomValue(authAtom);
+
     useEffect(() => {
         const fetchOffers = async () => {
             try {
-                const data = await getAll();
+                let data;
+                if (auth?.user?.companyId) {
+                    data = await getAllByCompanyId(auth.user.companyId);
+                } else if (auth?.user?.studentId) {
+                    data = await getAll();
+                } else {
+                    data = [];
+                }
+
+
+                if (!Array.isArray(data)) {
+                    throw new Error("La respuesta del servidor no es un array.");
+                }
                 setOffers(data);
             } catch (err) {
-                setError("Error al cargar las ofertas.");
+                console.error(err)
+                setError("Error al cargar las ofertas");
             } finally {
                 setLoading(false);
             }
         };
 
         fetchOffers();
-    }, []);
+    }, [auth?.user?.companyId, auth?.user?.studentId]);
 
     return { offers, loading, error };
 };

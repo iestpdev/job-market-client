@@ -1,7 +1,10 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { isAuthenticated } from "../modules/shared/utils/authUtils";
 import LoginPage from "../modules/auth/pages/Login";
+import Layout from "../modules/shared/components/layout/Layout";
 import { HomePage } from "../modules/home/pages/home";
+import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
+import CandidaciesScreen from "../screens/company/your-candidates/CandidaciesScreen";
 
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
@@ -26,22 +29,32 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <ProtectedRoute>
-        <HomePage />
-      </ProtectedRoute>
-    ),
-  },
-/*
-    {
-    path: "/publicar",
-    element: (
-      <ProtectedRoute>
         <Layout>
-          <h1>Página de Publicar Oferta</h1>
+          <HomePage />
         </Layout>
       </ProtectedRoute>
     ),
   },
-*/
+  {
+    path: "/createOffer",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <OffersCreatePage />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/your-candidates",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <CandidaciesScreen />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
   { path: "*", element: <NotFoundPage /> }
 ]);
 

@@ -1,15 +1,14 @@
 import { useState } from "react";
-import useOffers from "../hooks/useOffers";
-import useOfferDetails from "../hooks/useOfferDetails";
-import OfferList from "../components/list/OfferList";
-import OfferDetails from "../components/details/OfferDetails";
+import useOffers from "../../hooks/useOffers";
+import useOfferDetails from "../../hooks/useOfferDetails";
+import OfferList from "../../components/list/OfferList";
+import OfferDetails from "../../components/details/OfferDetails";
 import './Offers.css';
 
 const OffersPage = () => {
     const [selectedOfferId, setSelectedOfferId] = useState(null);
     const { offers, loading: offersLoading, error: offersError } = useOffers();
     const { offer, loading: detailsLoading, error: detailsError } = useOfferDetails(selectedOfferId);
-    console.log(offer);
 
     if (offersLoading) return <p>Cargando ofertas...</p>;
     if (offersError) return <p>{offersError}</p>;

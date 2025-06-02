@@ -1,6 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { Link, useNavigate } from "react-router-dom";
 import { authAtom } from "../../../auth/atoms/authAtom";
+import usePermissions from "../../../shared/hooks/usePermissions";
 import { useState } from "react";
 import "./Navbar.css";
 
@@ -9,6 +10,7 @@ export default function Navbar() {
     const setAuth = useSetAtom(authAtom);
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
+    const { canPublishOffers, canViewCandidacies, canViewPostulations } = usePermissions();
 
     const handleLogout = () => {
         localStorage.removeItem("auth");
@@ -18,30 +20,27 @@ export default function Navbar() {
 
     if (!auth.isAuthenticated) return null;
 
-    const role = auth.user?.tipo;
-
     return (
         <nav className="navbar">
             <div className="navbar-left">
-                <div className="navbar-logo">IESTP JOBS</div>
-                {role === "COMPANY" && (
-                    <>
-                        <Link to="/publicar" className="navbar-link">
-                            Publicar Oferta
+                <Link to="/" className="navbar-logo">IESTP JOBS</Link>
+                {canPublishOffers  && (
+                        <Link to="/createOffer" className="navbar-link">
+                            Nueva oferta
                         </Link>
-                        <Link to="/postulantes" className="navbar-link">
-                            Postulantes
-                        </Link>
-                    </>
                 )}
 
-                {
-                    role === "STUDENT" && (
-                        <Link to="/inscripciones" className="navbar-link">
-                            Postulaciones
+                {canViewCandidacies && (
+                        <Link to="/your-candidates" className="navbar-link">
+                            Tus postulantes
                         </Link>
-                    )
-                }
+                    )}
+
+                {canViewPostulations && (
+                        <Link to="/" className="navbar-link">
+                            Tus postulaciones
+                        </Link>
+                )}
             </div>
 
             <div className="navbar-right">

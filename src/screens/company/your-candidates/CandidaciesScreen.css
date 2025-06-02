@@ -1,0 +1,15 @@
+.candidacies-screen {
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.candidacies-table {
+    flex: 1;
+}
+
+.student-details {
+    flex: 1;
+    border-left: 1px solid #ccc;
+    padding-left: 1rem;
+}

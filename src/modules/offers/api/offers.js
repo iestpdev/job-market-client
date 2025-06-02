@@ -6,7 +6,7 @@ export const getAll = async () => {
 };
 
 export const getAllByCompanyId = async (companyId) => {
-    const { data } = await axios.get(`/offer/${companyId}`);
+    const { data } = await axios.get(`/offer/get-all-by-company-id/${companyId}`);
     return data;
 };
 
