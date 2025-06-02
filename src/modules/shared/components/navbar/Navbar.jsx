@@ -32,7 +32,7 @@ export default function Navbar() {
 
                 {canViewCandidacies && (
                         <Link to="/candidacies" className="navbar-link">
-                            Tus aplicantes
+                            Tus postulantes
                         </Link>
                     )}
 
