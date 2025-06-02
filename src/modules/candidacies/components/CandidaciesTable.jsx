@@ -2,9 +2,8 @@ import { useMemo } from "react";
 import { useGenericTable, renderCell } from "../../shared/components/table/tableConfig";
 import { flexRender } from '@tanstack/react-table';
 import useCandidaciesByCompany from "../hooks/useCandidaciesByCompany";
-import { Link } from "react-router-dom";
 
-export default function CandidaciesTable() {
+export default function CandidaciesTable({ onSelectStudent }) {
     const { candidacies, loading, error } = useCandidaciesByCompany();
 
     const columns = useMemo(
@@ -27,11 +26,7 @@ export default function CandidaciesTable() {
                 cell: ({ getValue }) => {
                     const estado = getValue();
                     const color =
-                        estado === "APPROVED"
-                            ? "green"
-                            : estado === "REJECTED"
-                                ? "red"
-                                : "gray";
+                        estado === "APPROVED" ? "green" : estado === "REJECTED" ? "red" : "gray";
                     return <span style={{ color }}>{estado}</span>;
                 },
             },
@@ -39,11 +34,16 @@ export default function CandidaciesTable() {
                 id: "ver_mas",
                 header: "Ver Más",
                 cell: ({ row }) => (
-                    <Link to={`/candidacies/${row.original.ID}`}>Detalles</Link>
+                    <button
+                        onClick={() => onSelectStudent(row.original.ALUMNO_ID)}
+                        style={{ cursor: "pointer", background: "none", border: "none", color: "blue" }}
+                    >
+                        Ver más
+                    </button>
                 ),
             },
         ],
-        []
+        [onSelectStudent]
     );
 
     const table = useGenericTable({ columns, data: candidacies });
@@ -69,9 +69,7 @@ export default function CandidaciesTable() {
                     {table.getRowModel().rows.map((row) => (
                         <tr key={row.id}>
                             {row.getVisibleCells().map((cell) => (
-                                <td key={cell.id}>
-                                    {renderCell(cell)}
-                                </td>
+                                <td key={cell.id}>{renderCell(cell)}</td>
                             ))}
                         </tr>
                     ))}
@@ -80,3 +78,4 @@ export default function CandidaciesTable() {
         </div>
     );
 }
+

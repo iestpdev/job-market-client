@@ -4,8 +4,7 @@ import LoginPage from "../modules/auth/pages/Login";
 import Layout from "../modules/shared/components/layout/Layout";
 import { HomePage } from "../modules/home/pages/home";
 import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
-import CandidaciesPage from "../modules/candidacies/pages/Candidacies";
-import StudentDetailsPage from "../modules/students/pages/Student";
+import CandidaciesScreen from "../screens/company/your-candidates/CandidaciesScreen";
 
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
@@ -47,21 +46,11 @@ const router = createBrowserRouter([
     ),
   },
   {
-    path: "/candidacies",
+    path: "/your-candidates",
     element: (
       <ProtectedRoute>
         <Layout>
-          <CandidaciesPage />
-        </Layout>
-      </ProtectedRoute>
-    ),
-  },
-  {
-    path: "/candidacies/:id",
-    element: (
-      <ProtectedRoute>
-        <Layout>
-          <StudentDetailsPage />
+          <CandidaciesScreen />
         </Layout>
       </ProtectedRoute>
     ),
