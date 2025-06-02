@@ -10,7 +10,7 @@ export default function Navbar() {
     const setAuth = useSetAtom(authAtom);
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const { canPublishOffers, canViewCandidacies, canViewPostulations } = usePermissions();
+    const { canPublishOffers, canViewCandidacies, canViewPostulations, isCompany, isStudent, companyId, studentId } = usePermissions();
 
     const handleLogout = () => {
         localStorage.removeItem("auth");
@@ -24,22 +24,22 @@ export default function Navbar() {
         <nav className="navbar">
             <div className="navbar-left">
                 <Link to="/" className="navbar-logo">IESTP JOBS</Link>
-                {canPublishOffers  && (
-                        <Link to="/createOffer" className="navbar-link">
-                            Nueva oferta
-                        </Link>
+                {canPublishOffers && (
+                    <Link to="/createOffer" className="navbar-link">
+                        Nueva oferta
+                    </Link>
                 )}
 
                 {canViewCandidacies && (
-                        <Link to="/your-candidates" className="navbar-link">
-                            Tus postulantes
-                        </Link>
-                    )}
+                    <Link to="/your-candidates" className="navbar-link">
+                        Tus postulantes
+                    </Link>
+                )}
 
                 {canViewPostulations && (
-                        <Link to="/" className="navbar-link">
-                            Tus postulaciones
-                        </Link>
+                    <Link to="/" className="navbar-link">
+                        Tus postulaciones
+                    </Link>
                 )}
             </div>
 
@@ -55,7 +55,11 @@ export default function Navbar() {
                     />
                     {dropdownOpen && (
                         <div className="navbar-dropdown">
-                            <Link to="/perfil" className="dropdown-item">Mi Perfil</Link>
+                            {isCompany && companyId && (
+                                <Link to={`/company/edit/${companyId}`} className="dropdown-item">
+                                    Mi Empresa
+                                </Link>
+                            )}
                             <button onClick={handleLogout} className="dropdown-item">Cerrar sesión</button>
                         </div>
                     )}
