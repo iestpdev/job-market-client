@@ -3,6 +3,7 @@ import {
     getCoreRowModel,
     getPaginationRowModel,
     flexRender,
+    getFilteredRowModel
 } from '@tanstack/react-table';
 
 export const useGenericTable = ({ columns, data }) => {
@@ -11,6 +12,10 @@ export const useGenericTable = ({ columns, data }) => {
         columns,
         getCoreRowModel: getCoreRowModel(),
         getPaginationRowModel: getPaginationRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        state: {
+            globalFilter: '', 
+        },
     });
 };
 

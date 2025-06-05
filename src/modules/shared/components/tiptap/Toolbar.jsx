@@ -1,4 +1,4 @@
-import { FaBold, FaItalic, FaListUl, FaListOl, FaHeading } from "react-icons/fa";
+import { FaBold, FaItalic, FaListUl, FaListOl } from "react-icons/fa";
 import "./Toolbar.css";
 
 const Toolbar = ({ editor }) => {
@@ -54,16 +54,6 @@ const Toolbar = ({ editor }) => {
                 title="Lista Ordenada"
             >
                 <FaListOl />
-            </button>
-
-            {/* Botón Encabezado 1 */}
-            <button
-                type="button"
-                onClick={() => handleCommand("setHeading", { level: 1 })}
-                className={editor.isActive("heading", { level: 1 }) ? "is-active" : ""}
-                title="Encabezado 1"
-            >
-                <FaHeading />
             </button>
         </div>
     );

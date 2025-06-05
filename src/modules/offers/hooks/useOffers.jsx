@@ -22,7 +22,6 @@ const useOffers = () => {
                     data = [];
                 }
 
-
                 if (!Array.isArray(data)) {
                     throw new Error("La respuesta del servidor no es un array.");
                 }

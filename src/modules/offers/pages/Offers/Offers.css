@@ -1,5 +1,6 @@
 .offers-page {
     display: flex;
+    margin: 1rem auto;
     gap: 1rem;
 }
 
@@ -8,6 +9,7 @@
     background-color: var(--color-blanco);
     padding: 1rem;
     border: 1px solid var(--color-borde-gris);
+    border-radius: 8px;
 }
 
 .offer-details-container {
@@ -15,4 +17,5 @@
     background-color: var(--color-blanco);
     padding: 1rem;
     border: 1px solid var(--color-borde-gris);
+    border-radius: 8px;
 }
