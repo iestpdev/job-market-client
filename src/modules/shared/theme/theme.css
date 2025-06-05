@@ -5,6 +5,9 @@
     --color-negro: #000000;
     --color-negro-transparente: rgba(0, 0, 0, 0.5);
     --color-gris: #777676;
+    --color-gris-claro: #CCCCCC;
+    --color-gris-texto: #595959;
+    --color-gris-suave: #F8F9FA;
 
     /* Azules / Celestes */
     --color-azul-claro: #E9F1FA;
@@ -15,6 +18,7 @@
     --color-azul-oscuro: #2B6CB0;
     --color-azul-marino: #1E3A8A;
     --color-azul-noche: #002060;
+    --color-azul-indeed: #2557A7;
 
     /* Estados / acciones */
     --color-verde: #38A169;
@@ -26,4 +30,5 @@
     /* Hover / borders */
     --color-borde-gris: #E0E0E0;
     --color-fondo-hover: #F0F4F8;
+    --color-borde-sutil: #DADCE0;
 }

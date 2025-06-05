@@ -1,6 +1,6 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { isAuthenticated } from "../modules/shared/utils/authUtils";
-import LoginPage from "../modules/auth/pages/Login";
+import LoginPage from "../modules/auth/pages/Login/Login";
 import Layout from "../modules/shared/layouts/Layout";
 import { HomePage } from "../modules/home/pages/home";
 import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
@@ -18,6 +18,7 @@ const PublicRoute = ({ children }) => {
 const NotFoundPage = () => <h1>404 - Página no encontrada</h1>;
 
 const router = createBrowserRouter([
+  { path: "*", element: <NotFoundPage /> },
   {
     path: "/login",
     element: (
@@ -65,8 +66,7 @@ const router = createBrowserRouter([
         </Layout>
       </ProtectedRoute>
     ),
-  },
-  { path: "*", element: <NotFoundPage /> }
+  }
 ]);
 
 export default router;

@@ -1,0 +1,36 @@
+.student-details-card {
+    background-color: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 600px;
+    margin: auto;
+}
+
+.student-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #222;
+}
+
+.student-info-item {
+    margin-bottom: 0.75rem;
+}
+
+.student-info-item strong {
+    color: #444;
+}
+
+.curriculum-link {
+    display: inline-block;
+    margin-top: 0.5rem;
+    color: #0358cb;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.curriculum-link:hover {
+    text-decoration: underline;
+}
