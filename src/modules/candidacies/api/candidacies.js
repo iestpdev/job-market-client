@@ -14,3 +14,8 @@ export const getAttachmentsByStudentId = async (studentId) => {
     const { data } = await axios.get(`/candidacy/get-attachments-by-student-id/${studentId}`);
     return data;
 };
+
+export const updateStatusById = async (id, status) => {
+    const { data } = await axios.patch(`/candidacy/status/${id}`, { status });
+    return data;
+};

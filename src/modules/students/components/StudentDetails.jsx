@@ -14,7 +14,6 @@ export default function StudentDetails({ student }) {
         NUM_DOI,
         CURRICULUM,
     } = student;
-    console.log(student)
 
     return (
         <div className="student-details-card">

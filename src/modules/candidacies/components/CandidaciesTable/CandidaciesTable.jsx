@@ -27,7 +27,7 @@ export default function CandidaciesTable({ candidacies, onSelectStudent }) {
                 header: "Detalles",
                 cell: ({ row }) => (
                     <button
-                        onClick={() => onSelectStudent(row.original.ALUMNO_ID)}
+                        onClick={() => onSelectStudent(row.original.ALUMNO_ID, row.original.ID)}
                         className="details-button"
                     >
                         <MdOutlineDescription />

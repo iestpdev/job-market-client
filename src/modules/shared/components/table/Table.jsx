@@ -68,7 +68,7 @@ const GenericTable = ({ table }) => {
                         table.setPageSize(Number(e.target.value));
                     }}
                 >
-                    {[5, 10, 20, 50].map((pageSize) => (
+                    {[ 5, 10, 20, 50].map((pageSize) => (
                         <option key={pageSize} value={pageSize}>
                             {pageSize} por página
                         </option>

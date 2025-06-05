@@ -7,7 +7,7 @@ export default function StudentAttachments({ studentId }) {
     if (loading) return <p className="student-info-item">Cargando adjuntos...</p>;
     if (error) return <p className="student-info-item" style={{ color: "red" }}>{error}</p>;
 
-    const keys = ["DOC_ADJUNTO1", "DOC_ADJUNTO2", "DOC_ADJUNTO3", "DOC_ADJUNTO4"];
+    const keys = ["DOC_ADJUNTO2", "DOC_ADJUNTO3", "DOC_ADJUNTO4"];
 
     const visibleDocs = keys.filter((key) => attachments[key]);
 
