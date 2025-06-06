@@ -6,6 +6,7 @@ import { HomePage } from "../modules/home/pages/home";
 import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
 import YourCandidaciesScreen from "../screens/company/your-candidates/YourCandidaciesScreen";
 import CompanyEditPage from "../modules/companies/pages/CompanyEdit/CompanyEdit";
+import StudentEditPage from "../modules/students/pages/StudentEdit";
 
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
@@ -66,7 +67,20 @@ const router = createBrowserRouter([
         </Layout>
       </ProtectedRoute>
     ),
+  },
+  {
+    path: "/student/edit/:id",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <StudentEditPage/>
+        </Layout>
+      </ProtectedRoute>
+    ),
   }
 ]);
 
 export default router;
+
+//TODO: aplicar Toast (modales)
+//TODO: aplicar i18next para soporte multilingue

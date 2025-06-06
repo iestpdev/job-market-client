@@ -10,17 +10,16 @@ export const getById = async (id) => {
     return data;
 };
 
-export const create = async (student) => {
-    const { data } = await axios.post("/student", student);
-    return data;
-};
-
 export const updateById = async (id, student) => {
     const { data } = await axios.patch(`/student/${id}`, student);
     return data;
 };
 
-export const deleteById = async (id) => {
-    const { data } = await axios.delete(`/student/${id}`);
+export const updateByIdWithFormData = async (id, formData) => {
+    const { data } = await axios.patch(`/student/${id}`, formData, {
+        headers: {
+            "Content-Type": "multipart/form-data",
+        },
+    });
     return data;
 };

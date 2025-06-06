@@ -8,7 +8,6 @@ export default function CompanyEditPage() {
     const navigate = useNavigate();
     const { company, loading, error } = useCompanyDetails(id);
     const { mutate, isPending } = useCompanyUpdate(id, () => {
-        alert("Empresa actualizada correctamente");
         navigate("/");
     });
 
