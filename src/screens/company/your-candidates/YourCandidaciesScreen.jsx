@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useCandidaciesByCompany from "../../../modules/candidacies/hooks/useCandidaciesByCompany";
 import CandidaciesTable from "../../../modules/candidacies/components/CandidaciesTable/CandidaciesTable";
-import StudentDetails from "../../../modules/students/components/StudentDetails";
+import StudentDetails from "../../../modules/students/components/studentDetails/StudentDetails";
 import useStudentDetails from "../../../modules/students/hooks/useStudentDetails";
 import CandidacyStatusActions from "../../../modules/candidacies/components/CandidacyStatusActions/CandidacyStatusActions";
 

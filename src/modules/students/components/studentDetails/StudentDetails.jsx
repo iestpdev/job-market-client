@@ -1,4 +1,4 @@
-import StudentAttachments from "../../candidacies/components/StudentAttachments/StudentAttachments";
+import StudentAttachments from "../../../candidacies/components/StudentAttachments/StudentAttachments";
 import "./StudentDetails.css";
 
 export default function StudentDetails({ student }) {

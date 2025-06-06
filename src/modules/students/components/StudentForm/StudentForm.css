@@ -1,0 +1,57 @@
+.student-form-container {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 12px;
+    background-color: #f9fafb;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.student-form-container h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #0358CB;
+}
+
+.student-form-group {
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.student-form-group label {
+    font-weight: bold;
+    margin-bottom: 0.3rem;
+    color: #333;
+}
+
+.student-form-group input,
+.student-form-group select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline-color: #0358CB;
+    background-color: white;
+}
+
+.student-form-group input[type="file"] {
+    padding: 0.3rem;
+}
+
+.student-form-submit {
+    margin-top: 1.5rem;
+    padding: 0.75rem 1rem;
+    background-color: #0358CB;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.student-form-submit:hover {
+    background-color: #024bb1;
+}

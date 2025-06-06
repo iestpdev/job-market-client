@@ -60,6 +60,11 @@ export default function Navbar() {
                                     Mi Empresa
                                 </Link>
                             )}
+                            {isStudent && studentId && (
+                                <Link to={`/student/edit/${studentId}`} className="dropdown-item">
+                                    Mi Perfil
+                                </Link>
+                            )}
                             <button onClick={handleLogout} className="dropdown-item">Cerrar sesión</button>
                         </div>
                     )}
