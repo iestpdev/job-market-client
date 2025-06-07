@@ -7,6 +7,7 @@ import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
 import YourCandidaciesScreen from "../screens/company/your-candidates/YourCandidaciesScreen";
 import CompanyEditPage from "../modules/companies/pages/CompanyEdit/CompanyEdit";
 import StudentEditPage from "../modules/students/pages/StudentEdit";
+import YourApplicationsScreen from "../screens/student/your-applications/YourApplicationsScreen";
 
 const ProtectedRoute = ({ children }) => {
   return isAuthenticated() ? children : <Navigate to="/login" />;
@@ -54,6 +55,16 @@ const router = createBrowserRouter([
       <ProtectedRoute>
         <Layout>
           <YourCandidaciesScreen />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: "/your-applications",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <YourApplicationsScreen/>
         </Layout>
       </ProtectedRoute>
     ),

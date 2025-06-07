@@ -1,7 +1,17 @@
+import { useState } from 'react';
+import UploadDocsModal from '../../../candidacies/components/UploadDocsModal/UploadDocsModal';
 import usePermissions from '../../../shared/hooks/usePermissions';
+import useCheckIfApplied from '../../../candidacies/hooks/useCheckIfApplied';
 import './OfferDetails.css';
 
-const OfferDetails = ({ offer }) => {
+const OfferDetails = ({ offer, showApplyBtn = true }) => {
+    const [showModal, setShowModal] = useState(false);
+    const [_, setCandidacyId] = useState(null);
+    const { isStudent, studentId } = usePermissions();
+    const { data: alreadyApplied, isLoading: checking, refetch: refetchApplied } = useCheckIfApplied(offer.ID, studentId);
+    
+    const [hasApplied, setHasApplied] = useState(false);
+    const isApplied = alreadyApplied || hasApplied;
     if (!offer) {
         return (
             <div className="offer-details-empty">
@@ -10,7 +20,10 @@ const OfferDetails = ({ offer }) => {
         );
     }
 
-    const { isStudent, studentId } = usePermissions();
+    const handleApply = () => {
+        setShowModal(true);
+    };
+
     const {
         TITULO,
         RAZON_SOCIAL,
@@ -41,7 +54,7 @@ const OfferDetails = ({ offer }) => {
 
     return (
         <div className="offer-details">
-            {/* Header Section */}
+            {/* Header */}
             <div className="offer-details-header">
                 <div className="offer-header-content">
                     <h1 className="offer-title">{TITULO}</h1>
@@ -55,24 +68,39 @@ const OfferDetails = ({ offer }) => {
                 </div>
 
                 <div className="offer-actions">
-                    {isStudent && studentId && (
-                        <button className="btn-apply">
-                            Postularse ahora
-                        </button>
+                    {isStudent && studentId && showApplyBtn && (
+                        <>
+                            <button
+                                className={`btn-apply ${alreadyApplied ? "applied" : ""}`}
+                                onClick={handleApply}
+                                disabled={isApplied  || checking}
+                            >
+                                {checking
+                                    ? "Verificando..."
+                                    : alreadyApplied
+                                        ? "Ya has postulado"
+                                        : "Postularse ahora"}
+                            </button>
+
+                            {showModal && (
+                                <UploadDocsModal
+                                    offerId={offer.ID}
+                                    studentId={studentId}
+                                    onClose={() => setShowModal(false)}
+                                    setCandidacyId={setCandidacyId}
+                                    onApplied={() => {
+                                        setHasApplied(true);
+                                        refetchApplied();
+                                    }} 
+                                />
+                            )}
+                        </>
                     )}
                 </div>
+
             </div>
 
-            {/* Location Section */}
-            <div className="offer-section">
-                <h3 className="section-title">Ubicación</h3>
-                <div className="location-detail">
-                    <span className="location-icon">📍</span>
-                    <span>{DIRECCION1}</span>
-                </div>
-            </div>
-
-            {/* Salary Information */}
+            {/* Informacion de salario */}
             {(SUELDO || VIATICOS || BONOS) && (
                 <div className="offer-section">
                     <h3 className="section-title">Compensación</h3>
@@ -99,7 +127,7 @@ const OfferDetails = ({ offer }) => {
                 </div>
             )}
 
-            {/* Job Description */}
+            {/* Descripción del empleo */}
             <div className="offer-section">
                 <h3 className="section-title">Descripción completa del empleo</h3>
                 <div
@@ -108,7 +136,7 @@ const OfferDetails = ({ offer }) => {
                 />
             </div>
 
-            {/* Requirements */}
+            {/* REQUISITOS */}
             {REQUISITOS && (
                 <div className="offer-section">
                     <h3 className="section-title">Requisitos</h3>
@@ -119,7 +147,7 @@ const OfferDetails = ({ offer }) => {
                 </div>
             )}
 
-            {/* Benefits */}
+            {/* BENEFICIOS */}
             {BENEFICIOS && (
                 <div className="offer-section">
                     <h3 className="section-title">Beneficios</h3>
@@ -130,7 +158,7 @@ const OfferDetails = ({ offer }) => {
                 </div>
             )}
 
-            {/* Publication Info */}
+            {/* Información de publicación */}
             <div className="offer-section">
                 <h3 className="section-title">Información de publicación</h3>
                 <div className="publication-info">
@@ -146,15 +174,6 @@ const OfferDetails = ({ offer }) => {
                     )}
                 </div>
             </div>
-
-            {/* Bottom Apply Button */}
-            {isStudent && studentId && (
-                <div className="offer-bottom-actions">
-                    <button className="btn-apply btn-apply-bottom">
-                        Postularse ahora
-                    </button>
-                </div>
-            )}
         </div>
     );
 };
