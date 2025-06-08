@@ -271,11 +271,32 @@
     text-align: center;
 }
 
-.btn-apply-bottom {
-    min-width: 200px;
-    font-size: 18px;
-    padding: 14px 32px;
+.btn-apply {
+    background-color: #0358cb;
+    color: white;
+    border: none;
+    padding: 0.6rem 1rem;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
+
+.btn-apply:hover {
+    background-color: #0248a2;
+}
+
+.btn-apply.applied {
+    background-color: white;
+    color: #0358cb;
+    border: 2px solid #0358cb;
+    cursor: default;
+}
+
+.btn-apply.applied:hover {
+    background-color: white;
+}
+
 
 /* Responsive Design */
 @media (max-width: 768px) {

@@ -1,7 +1,7 @@
 import { useAtomValue, useSetAtom } from "jotai";
 import { Link, useNavigate } from "react-router-dom";
 import { authAtom } from "../../../auth/atoms/authAtom";
-import usePermissions from "../../../shared/hooks/usePermissions";
+import usePermissions from "../../hooks/usePermissions";
 import { useState } from "react";
 import "./Navbar.css";
 
@@ -37,7 +37,7 @@ export default function Navbar() {
                 )}
 
                 {canViewPostulations && (
-                    <Link to="/" className="navbar-link">
+                    <Link to="/your-applications" className="navbar-link">
                         Tus postulaciones
                     </Link>
                 )}
