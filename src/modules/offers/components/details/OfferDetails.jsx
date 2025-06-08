@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
 import UploadDocsModal from '../../../candidacies/components/UploadDocsModal/UploadDocsModal';
 import usePermissions from '../../../shared/hooks/usePermissions';
@@ -18,6 +18,13 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
     });
 
     const [hasApplied, setHasApplied] = useState(false);
+
+    useEffect(() => {
+        setShowModal(false);
+        setHasApplied(false);
+        setCandidacyId(null);
+    }, [offer?.ID]);
+
     const isApplied = alreadyApplied || hasApplied;
     if (!offer) {
         return (
@@ -41,6 +48,10 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
         BENEFICIOS,
         FECHA_PUBLICACION,
         FECHA_CIERRE,
+        NUM_VACANTES,
+        CONTACTO,
+        CORREO,
+        TELEFONO,
     } = offer;
 
     const formatDate = (dateString) => {
@@ -70,7 +81,6 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                         <span className="location-icon">📍</span>
                         <span className="location-text">{DIRECCION1}</span>
                     </div>
-
                 </div>
 
                 {!isStudent && (
@@ -78,7 +88,6 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                         <button className="btn-edit" onClick={() => navigate(`/offer/edit/${offer.ID}`)}>
                             Editar Oferta
                         </button>
-
                         <button
                             className="btn-delete"
                             onClick={() => {
@@ -123,10 +132,9 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                         </>
                     )}
                 </div>
-
             </div>
 
-            {/* Informacion de salario */}
+            {/* Compensación */}
             {(SUELDO || VIATICOS || BONOS) && (
                 <div className="offer-section">
                     <h3 className="section-title">Compensación</h3>
@@ -153,38 +161,50 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                 </div>
             )}
 
-            {/* Descripción del empleo */}
-            <div className="offer-section">
-                <h3 className="section-title">Descripción completa del empleo</h3>
-                <div
-                    className="job-description"
-                    dangerouslySetInnerHTML={{ __html: DESCRIPCION || "No especificada" }}
-                />
-            </div>
+            {/* Descripción */}
+            {DESCRIPCION && DESCRIPCION.replace(/<[^/>]+><\/[^>]+>/g, '').trim() !== '' && (
+                <div className="offer-section">
+                    <h3 className="section-title">Descripción completa del empleo</h3>
+                    <div className="job-description" dangerouslySetInnerHTML={{ __html: DESCRIPCION || "No especificada" }} />
+                </div>
+            )}
 
-            {/* REQUISITOS */}
-            {REQUISITOS && (
+            {/* Requisitos */}
+            {REQUISITOS && REQUISITOS.replace(/<[^/>]+><\/[^>]+>/g, '').trim() !== '' && (
                 <div className="offer-section">
                     <h3 className="section-title">Requisitos</h3>
-                    <div
-                        className="job-requirements"
-                        dangerouslySetInnerHTML={{ __html: REQUISITOS }}
-                    />
+                    <div className="job-requirements" dangerouslySetInnerHTML={{ __html: REQUISITOS }} />
                 </div>
             )}
 
-            {/* BENEFICIOS */}
-            {BENEFICIOS && (
+            {/* Beneficios */}
+            {BENEFICIOS && BENEFICIOS.replace(/<[^/>]+><\/[^>]+>/g, '').trim() !== '' && (
                 <div className="offer-section">
                     <h3 className="section-title">Beneficios</h3>
-                    <div
-                        className="job-benefits"
-                        dangerouslySetInnerHTML={{ __html: BENEFICIOS }}
-                    />
+                    <div className="job-benefits" dangerouslySetInnerHTML={{ __html: BENEFICIOS }} />
                 </div>
             )}
 
-            {/* Información de publicación */}
+            {/* Información adicional */}
+            <div className="offer-section">
+                <h3 className="section-title">Información adicional</h3>
+                <ul className="info-list">
+                    {NUM_VACANTES &&
+                        <li><strong>Vacantes:</strong> {NUM_VACANTES}</li>
+                    }
+                    {CONTACTO &&
+                        <li><strong>Contacto:</strong> {CONTACTO}</li>
+                    }
+                    {CORREO &&
+                        <li><strong>Correo:</strong> {CORREO}</li>
+                    }
+                    {TELEFONO &&
+                        <li><strong>Teléfono:</strong> {TELEFONO}</li>
+                    }
+                </ul>
+            </div>
+
+            {/* Publicación */}
             <div className="offer-section">
                 <h3 className="section-title">Información de publicación</h3>
                 <div className="publication-info">

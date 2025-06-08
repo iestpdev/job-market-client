@@ -26,12 +26,6 @@ const OfferCard = ({ offer }) => {
                 <span className="location-text">{DIRECCION1}</span>
             </div>
 
-            <div className="offer-meta">
-                {SUELDO && Number(SUELDO) > 0 && (
-                    <span className="job-tag">Sueldo: {SUELDO}</span>
-                )}
-            </div>
-
             <div className="offer-footer">
                 <span className="publish-date">Fecha de publicación: {formatDate(FECHA_PUBLICACION)}</span>
             </div>
