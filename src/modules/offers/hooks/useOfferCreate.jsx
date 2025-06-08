@@ -35,12 +35,19 @@ export const useOfferCreate = () => {
 
         if (name === "sueldo") {
             const newSueldo = Number(value);
-            setFormData((prev) => ({
-                ...prev,
-                [name]: newSueldo,
-                adHonorem: newSueldo === 0 ? false : prev.adHonorem,
-            }));
 
+            setFormData((prev) => {
+                const updated = {
+                    ...prev,
+                    [name]: newSueldo,
+                };
+
+                if (newSueldo !== 0) {
+                    updated.adHonorem = false;
+                }
+
+                return updated;
+            });
         } else {
             setFormData((prev) => ({
                 ...prev,

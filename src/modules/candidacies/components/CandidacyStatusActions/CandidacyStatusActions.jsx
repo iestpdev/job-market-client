@@ -2,7 +2,6 @@ import useCandidacyStatusUpdate from "../../hooks/useCandidacyStatusUpdate";
 
 export default function CandidacyStatusActions({ candidacyId, onStatusChange  }) {
     const { mutate, isLoading } = useCandidacyStatusUpdate(() =>{
-        console.log("Estado actualizado correctamente");
         onStatusChange?.();
     });
 

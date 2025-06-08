@@ -1,15 +1,22 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import UploadDocsModal from '../../../candidacies/components/UploadDocsModal/UploadDocsModal';
 import usePermissions from '../../../shared/hooks/usePermissions';
 import useCheckIfApplied from '../../../candidacies/hooks/useCheckIfApplied';
+import useOfferDelete from '../../hooks/useOfferDelete';
 import './OfferDetails.css';
 
-const OfferDetails = ({ offer, showApplyBtn = true }) => {
+const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
+    const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [_, setCandidacyId] = useState(null);
     const { isStudent, studentId } = usePermissions();
     const { data: alreadyApplied, isLoading: checking, refetch: refetchApplied } = useCheckIfApplied(offer.ID, studentId);
-    
+    const { mutate: deleteOffer, isPending } = useOfferDelete(() => {
+        navigate("/");
+        onDelete?.();
+    });
+
     const [hasApplied, setHasApplied] = useState(false);
     const isApplied = alreadyApplied || hasApplied;
     if (!offer) {
@@ -20,9 +27,7 @@ const OfferDetails = ({ offer, showApplyBtn = true }) => {
         );
     }
 
-    const handleApply = () => {
-        setShowModal(true);
-    };
+    const handleApply = () => setShowModal(true);
 
     const {
         TITULO,
@@ -65,7 +70,28 @@ const OfferDetails = ({ offer, showApplyBtn = true }) => {
                         <span className="location-icon">📍</span>
                         <span className="location-text">{DIRECCION1}</span>
                     </div>
+
                 </div>
+
+                {!isStudent && (
+                    <>
+                        <button className="btn-edit" onClick={() => navigate(`/offer/edit/${offer.ID}`)}>
+                            Editar Oferta
+                        </button>
+
+                        <button
+                            className="btn-delete"
+                            onClick={() => {
+                                if (confirm("¿Estás seguro de que deseas eliminar esta oferta?")) {
+                                    deleteOffer(offer.ID);
+                                }
+                            }}
+                            disabled={isPending}
+                        >
+                            {isPending ? "Eliminando..." : "Eliminar Oferta"}
+                        </button>
+                    </>
+                )}
 
                 <div className="offer-actions">
                     {isStudent && studentId && showApplyBtn && (
@@ -73,7 +99,7 @@ const OfferDetails = ({ offer, showApplyBtn = true }) => {
                             <button
                                 className={`btn-apply ${alreadyApplied ? "applied" : ""}`}
                                 onClick={handleApply}
-                                disabled={isApplied  || checking}
+                                disabled={isApplied || checking}
                             >
                                 {checking
                                     ? "Verificando..."
@@ -91,7 +117,7 @@ const OfferDetails = ({ offer, showApplyBtn = true }) => {
                                     onApplied={() => {
                                         setHasApplied(true);
                                         refetchApplied();
-                                    }} 
+                                    }}
                                 />
                             )}
                         </>
