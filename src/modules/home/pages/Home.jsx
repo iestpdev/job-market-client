@@ -1,7 +1,14 @@
-import OffersPage from '../../offers/pages/Offers/Offers';
+import { useState } from "react";
+import OfferSearchAndFilters from "../../offers/components/search/SearchAndFilters";
+import OffersPage from "../../offers/pages/Offers/Offers";
 
 export const HomePage = () => {
+    const [filters, setFilters] = useState(null);
+
     return (
-            <OffersPage />
+        <>
+            <OfferSearchAndFilters onSearch={setFilters} />
+            <OffersPage filters={filters} />
+        </>
     );
 };
