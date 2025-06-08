@@ -1,7 +1,8 @@
+import "./CandidacyStatusActions.css";
 import useCandidacyStatusUpdate from "../../hooks/useCandidacyStatusUpdate";
 
-export default function CandidacyStatusActions({ candidacyId, onStatusChange  }) {
-    const { mutate, isLoading } = useCandidacyStatusUpdate(() =>{
+export default function CandidacyStatusActions({ candidacyId, onStatusChange }) {
+    const { mutate, isLoading } = useCandidacyStatusUpdate(() => {
         onStatusChange?.();
     });
 
@@ -10,18 +11,18 @@ export default function CandidacyStatusActions({ candidacyId, onStatusChange  })
     };
 
     return (
-        <div style={{ marginTop: "1rem" }}>
+        <div className="status-actions-container">
             <button
                 onClick={() => handleUpdate("APPROVED")}
                 disabled={isLoading}
-                style={{ marginRight: "1rem", backgroundColor: "green", color: "white", padding: "0.5rem" }}
+                className="status-button approve"
             >
                 Aprobar
             </button>
             <button
                 onClick={() => handleUpdate("REJECTED")}
                 disabled={isLoading}
-                style={{ backgroundColor: "red", color: "white", padding: "0.5rem" }}
+                className="status-button reject"
             >
                 Rechazar
             </button>
