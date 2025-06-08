@@ -4,6 +4,7 @@ import LoginPage from "../modules/auth/pages/Login/Login";
 import Layout from "../modules/shared/layouts/Layout";
 import { HomePage } from "../modules/home/pages/home";
 import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
+import OfferEditPage from "../modules/offers/pages/OfferEdit/OfferEdit";
 import YourCandidaciesScreen from "../screens/company/your-candidates/YourCandidaciesScreen";
 import CompanyEditPage from "../modules/companies/pages/CompanyEdit/CompanyEdit";
 import StudentEditPage from "../modules/students/pages/StudentEdit";
@@ -50,6 +51,16 @@ const router = createBrowserRouter([
     ),
   },
   {
+    path: "/offer/edit/:id",
+    element: (
+      <ProtectedRoute>
+        <Layout>
+          <OfferEditPage />
+        </Layout>
+      </ProtectedRoute>
+    ),
+  },
+  {
     path: "/your-candidates",
     element: (
       <ProtectedRoute>
@@ -64,7 +75,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <YourApplicationsScreen/>
+          <YourApplicationsScreen />
         </Layout>
       </ProtectedRoute>
     ),
@@ -84,7 +95,7 @@ const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <Layout>
-          <StudentEditPage/>
+          <StudentEditPage />
         </Layout>
       </ProtectedRoute>
     ),

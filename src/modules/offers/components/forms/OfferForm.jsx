@@ -9,9 +9,13 @@ const OfferForm = ({
     beneficiosEditor,
     handleChange,
     handleSubmit,
+    isEdit = false
 }) => {
     return (
         <form className="offer-form" onSubmit={handleSubmit}>
+            <h2>
+                {isEdit ? "Editar oferta laboral" : "Crear una nueva oferta laboral"}
+            </h2>
             <div className="form-grid">
                 <div className="form-group">
                     <label>Título:</label>
@@ -23,7 +27,7 @@ const OfferForm = ({
                     <input type="number" name="sueldo" min={0} value={formData.sueldo} onChange={handleChange} />
                 </div>
 
-                {formData.sueldo === 0 && (
+                {Number(formData.sueldo) === 0 && (
                     <div className="form-group form-checkbox">
                         <label htmlFor="adHonorem">
                             ¿Es Ad Honorem?
@@ -105,7 +109,9 @@ const OfferForm = ({
                 </div>
             </div>
 
-            <button type="submit">Crear Oferta</button>
+            <button type="submit">
+                {isEdit ? "Guardar Cambios" : "Crear Oferta"}
+            </button>
         </form>
 
     );

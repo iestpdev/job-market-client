@@ -1,0 +1,83 @@
+.company-form {
+    max-width: 700px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9fafb;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.form-section-title {
+    font-size: 1.4rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: #0358cb;
+    border-bottom: 1px solid #d6e0f0;
+    padding-bottom: 0.3rem;
+}
+
+.company-form-title{
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #0358CB;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: 600;
+    margin-bottom: 0.3rem;
+    color: #333;
+}
+
+.form-group input,
+.form-group select {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline-color: #0358cb;
+    background-color: #fff;
+}
+
+.form-group input[type="file"] {
+    padding: 0.3rem;
+}
+
+.logo-preview {
+    margin-top: 0.5rem;
+}
+
+.logo-preview img {
+    max-width: 150px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.error-text {
+    color: red;
+    margin-top: 0.3rem;
+    font-size: 0.9rem;
+}
+
+.submit-btn {
+    margin-top: 2rem;
+    width: 100%;
+    padding: 0.75rem;
+    background-color: #0358cb;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #024aad;
+}

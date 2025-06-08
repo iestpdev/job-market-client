@@ -1,7 +1,7 @@
 import { useParams, useNavigate } from "react-router-dom";
 import useCompanyDetails from "../../hooks/useCompanyDetails";
 import useCompanyUpdate from "../../hooks/useCompanyUpdate";
-import CompanyForm from "../../components/CompanyForm";
+import CompanyForm from "../../components/CompanyForm/CompanyForm";
 
 export default function CompanyEditPage() {
     const { id } = useParams();
@@ -20,9 +20,8 @@ export default function CompanyEditPage() {
 
     return (
         <div>
-            <h1>Editar Empresa</h1>
             <CompanyForm company={company} onSubmit={handleSubmit} />
-            {isPending && <p>Actualizando...</p>}
+            {isPending && <p>Actualizando datos...</p>}
         </div>
     );
 }

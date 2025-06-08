@@ -6,7 +6,7 @@ import OfferDetails from "../../components/details/OfferDetails";
 import './Offers.css';
 
 const OffersPage = () => {
-    const { offers, loading: offersLoading, error: offersError } = useOffers();
+    const { offers, loading: offersLoading, error: offersError, refetch } = useOffers();
     const [selectedOfferId, setSelectedOfferId] = useState(null);
     const { offer, loading: detailsLoading, error: detailsError } = useOfferDetails(selectedOfferId);
 
@@ -28,7 +28,7 @@ const OffersPage = () => {
             <main className="offer-details-container">
                 {detailsLoading && <p>Cargando detalles de la oferta...</p>}
                 {detailsError && <p>{detailsError}</p>}
-                {!detailsLoading && offer && <OfferDetails offer={offer} />}
+                {!detailsLoading && offer && <OfferDetails offer={offer} onDelete={refetch} />}
             </main>
         </div>
     );

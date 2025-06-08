@@ -13,7 +13,6 @@ const OffersCreatePage = () => {
 
     return (
         <>
-            <h1>Crear Nueva Oferta Laboral</h1>
             <OfferForm
                 formData={formData}
                 descripcionEditor={descripcionEditor}

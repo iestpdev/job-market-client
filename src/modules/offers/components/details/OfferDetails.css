@@ -297,6 +297,37 @@
     background-color: white;
 }
 
+.btn-edit {
+    margin-top: 0.5rem;
+    background-color: white;
+    color: #0358CB;
+    border: 2px solid #0358CB;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-edit:hover {
+    background-color: #f0f7ff;
+}
+
+.btn-delete {
+    margin-top: 0.5rem;
+    background-color: white;
+    color: #e53935;
+    border: 2px solid #e53935;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.btn-delete:hover {
+    background-color: #ffe6e6;
+}
 
 /* Responsive Design */
 @media (max-width: 768px) {
