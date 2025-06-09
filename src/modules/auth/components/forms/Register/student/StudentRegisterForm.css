@@ -1,0 +1,365 @@
+/* Contenedor principal */
+.student-register-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Tarjeta del formulario */
+.student-register-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 670px;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: slideInUp 0.6s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Efecto decorativo */
+.student-register-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-azul), var(--color-azul-pastel));
+}
+
+/* Título */
+.student-register-title {
+    text-align: center;
+    margin-bottom: 35px;
+    color: #333;
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    position: relative;
+}
+
+.student-register-title::after {
+    content: '🎓';
+    display: block;
+    font-size: 24px;
+    margin-top: 8px;
+}
+
+/* Formulario */
+.student-register-form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+/* Secciones del formulario */
+.form-section {
+    background: #f8fafc;
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid var(--color-azul);
+}
+
+.section-title {
+    margin: 0 0 20px 0;
+    color: #334155;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.section-title::before {
+    content: '';
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-azul);
+}
+
+/* Grid del formulario */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Grupo de input */
+.input-group {
+    position: relative;
+}
+
+/* Inputs */
+.student-input {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    color: #333;
+    box-sizing: border-box;
+}
+
+.student-input:focus {
+    outline: none;
+    border-color: var(--color-azul);
+    background: white;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    transform: translateY(-2px);
+}
+
+.student-input::placeholder {
+    color: #94a3b8;
+    font-weight: 400;
+}
+
+/* Selects */
+.student-select {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: white;
+    color: #333;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.student-select:focus {
+    outline: none;
+    border-color: var(--color-azul);
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    transform: translateY(-2px);
+}
+
+.student-select option {
+    padding: 10px;
+    color: #333;
+}
+
+/* Input de fecha */
+.date-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    color: #64748b;
+    margin-bottom: 8px;
+}
+
+.date-input {
+    color: #64748b;
+}
+
+.date-input:focus,
+.date-input:valid {
+    color: #333;
+}
+
+/* Botón */
+.student-register-button {
+    width: 100%;
+    padding: 18px;
+    background: linear-gradient(135deg, var(--color-azul) 0%, var(--color-azul-pastel) 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
+}
+
+.student-register-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.student-register-button:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 25px rgba(79, 70, 229, 0.4);
+}
+
+.student-register-button:hover:not(:disabled)::before {
+    left: 100%;
+}
+
+.student-register-button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.student-register-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.student-register-button.loading {
+    color: transparent;
+}
+
+.student-register-button.loading::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50%;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Animaciones */
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estados de validación */
+.student-input:valid {
+    border-color: #10b981;
+}
+
+.student-input:invalid:not(:placeholder-shown) {
+    border-color: #ef4444;
+}
+
+.student-select:valid {
+    border-color: #10b981;
+}
+
+/* Mensaje de error */
+.error-message {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-top: 10px;
+}
+
+.error-message p {
+    color: #dc2626;
+    margin: 0;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .student-register-card {
+        padding: 30px 25px;
+        max-width: 100%;
+    }
+
+    .form-section {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .student-register-container {
+        padding: 15px;
+    }
+
+    .student-register-title {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    .student-input,
+    .student-select {
+        padding: 14px 16px;
+        font-size: 15px;
+    }
+
+    .student-register-button {
+        padding: 16px;
+        font-size: 15px;
+    }
+
+    .section-title {
+        font-size: 14px;
+    }
+}
+
+/* Efectos adicionales para mejor UX */
+.input-group {
+    animation: fadeInUp 0.5s ease-out forwards;
+    opacity: 0;
+}
+
+.input-group:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.input-group:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.input-group:nth-child(3) {
+    animation-delay: 0.3s;
+}
+
+.input-group:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.input-group {
+    transform: translateY(20px);
+}

@@ -1,0 +1,77 @@
+.register-page-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--color-azul) 0%, var(--color-azul-pastel) 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem;
+}
+
+.register-page-title {
+    color: white;
+    margin-bottom: 1.5rem;
+}
+
+.register-page-buttons {
+    margin-bottom: 0.1rem;
+}
+
+.register-toggle-button {
+    padding: 10px 20px;
+    margin: 0 8px;
+    border: 2px solid #2563eb;
+    border-radius: 8px;
+    background: white;
+    color: #2563eb;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.register-toggle-button.active {
+    background: #2563eb;
+    color: white;
+}
+
+.register-form-container {
+    width: 100%;
+    max-width: 800px;
+}
+
+.register-login-link a:hover {
+    opacity: 0.8;
+}
+
+.register-login-link {
+    margin-top: 30px;
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+}
+
+.register-login-link p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.register-login-link a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-left: 8px;
+    display: inline-block;
+}
+
+.register-login-link a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
