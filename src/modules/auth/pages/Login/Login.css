@@ -1,0 +1,146 @@
+/* Página de login */
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--color-azul) 0%, var(--color-azul-pastel) 100%);
+    padding: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Fondo decorativo */
+.login-page::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+    animation: float 20s infinite linear;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50px, -50px) rotate(360deg);
+    }
+}
+
+/* Header de la marca */
+.brand-header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+/* Título principal */
+.brand-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: white;
+    margin: 0;
+    letter-spacing: 3px;
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    background: linear-gradient(45deg, #ffffff, #f0f8ff, #ffffff);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmer 3s ease-in-out infinite;
+    position: relative;
+}
+
+.brand-title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, transparent, white, transparent);
+    border-radius: 2px;
+}
+
+@keyframes shimmer {
+
+    0%,
+    100% {
+        background-position: -200% 0;
+    }
+
+    50% {
+        background-position: 200% 0;
+    }
+}
+
+/* Subtítulo */
+.brand-subtitle {
+    font-size: 1.2rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin: 15px 0 0 0;
+    font-weight: 300;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Animaciones */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Anular el fondo del login-container para evitar conflictos */
+.login-page .login-container {
+    background: none;
+    min-height: auto;
+    padding: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .brand-title {
+        font-size: 2.8rem;
+        letter-spacing: 2px;
+    }
+
+    .brand-subtitle {
+        font-size: 1rem;
+    }
+
+    .brand-header {
+        margin-bottom: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .brand-title {
+        font-size: 2.2rem;
+        letter-spacing: 1px;
+    }
+
+    .brand-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .login-page {
+        padding: 15px;
+    }
+}

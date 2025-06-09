@@ -1,0 +1,40 @@
+.status-actions-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1.5rem;
+    gap: 1rem;
+}
+
+.status-button {
+    padding: 0.6rem 1.2rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.status-button.approve {
+    background-color: #2e7d32;
+    color: white;
+}
+
+.status-button.approve:hover {
+    background-color: #1b5e20;
+}
+
+.status-button.reject {
+    background-color: #c62828;
+    color: white;
+}
+
+.status-button.reject:hover {
+    background-color: #b71c1c;
+}
+
+.status-button:disabled {
+    background-color: #ccc;
+    color: #666;
+    cursor: not-allowed;
+}

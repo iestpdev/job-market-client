@@ -1,0 +1,134 @@
+.offer-card {
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde-sutil);
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+    cursor: pointer;
+    position: relative;
+}
+
+.offer-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    border-color: var(--color-azul-indeed);
+}
+
+.offer-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.offer-title {
+    color: var(--color-azul-indeed);
+    font-size: 18px;
+    font-weight: 600;
+    margin: 0;
+    line-height: 1.3;
+    text-decoration: none;
+    flex: 1;
+    padding-right: 12px;
+}
+
+.offer-title:hover {
+    text-decoration: underline;
+}
+
+
+
+.offer-company {
+    margin-bottom: 4px;
+}
+
+.company-name {
+    color: var(--color-gris-texto);
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.offer-location {
+    margin-bottom: 12px;
+}
+
+.location-text {
+    color: var(--color-gris-texto);
+    font-size: 14px;
+}
+
+.offer-meta {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    flex-wrap: wrap;
+}
+
+.job-tag {
+    background-color: var(--color-gris-suave);
+    color: var(--color-gris-texto);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 500;
+    border: 1px solid var(--color-borde-sutil);
+}
+
+.salary {
+    color: var(--color-gris-texto);
+    font-size: 14px;
+    font-weight: 500;
+}
+
+
+
+.offer-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 12px;
+    border-top: 1px solid var(--color-borde-sutil);
+}
+
+.publish-date {
+    color: var(--color-gris);
+    font-size: 12px;
+}
+
+.apply-btn {
+    background-color: transparent;
+    color: var(--color-azul-indeed);
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.apply-btn:hover {
+    background-color: var(--color-azul-claro);
+    text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .offer-card {
+        padding: 12px;
+    }
+
+    .offer-title {
+        font-size: 16px;
+    }
+
+    .offer-footer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+}

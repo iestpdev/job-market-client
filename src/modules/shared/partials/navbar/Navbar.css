@@ -1,0 +1,81 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--color-borde-gris);
+    background-color: var(--color-blanco);
+    font-family: sans-serif;
+}
+
+/* Izquierda */
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.navbar-logo {
+    font-weight: bold;
+    font-size: 1.2rem;
+    color: var(--color-negro);
+    text-decoration: none;
+}
+
+.navbar-link {
+    color: var(--color-negro);
+    text-decoration: none;
+    font-weight: normal;
+}
+
+.navbar-link.active {
+    color: var(--color-azul);
+    font-weight: bold;
+}
+
+/* Derecha */
+.navbar-right {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.navbar-avatar-wrapper {
+    position: relative;
+    cursor: pointer;
+}
+
+.navbar-avatar {
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+}
+
+.navbar-dropdown {
+    position: absolute;
+    top: 40px;
+    right: 0;
+    background-color: var(--color-blanco);
+    border: 1px solid var(--color-borde-gris);
+    border-radius: 0.5rem;
+    box-shadow: 0 2px 8px var(--color-negro-transparente);
+    z-index: 10;
+    min-width: 160px;
+    display: flex;
+    flex-direction: column;
+}
+
+.dropdown-item {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.95rem;
+    color: var(--color-negro);
+    text-decoration: none;
+}
+
+.dropdown-item:hover {
+    background-color: var(--color-fondo-hover);
+}
