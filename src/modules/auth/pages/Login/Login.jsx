@@ -1,4 +1,5 @@
 import LoginForm from "../../components/forms/Login/LoginForm";
+import { Link } from "react-router-dom";
 import "./Login.css";
 
 export default function LoginPage() {
@@ -9,6 +10,9 @@ export default function LoginPage() {
         <p className="brand-subtitle">Portal de Empleos y Oportunidades</p>
       </div>
       <LoginForm />
+      <div className="register-link">
+        <p>¿No tienes una cuenta? <Link to="/register">Regístrate aquí</Link></p>
+      </div>
     </div>
   );
 }

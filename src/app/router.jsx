@@ -1,8 +1,9 @@
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import { isAuthenticated } from "../modules/shared/utils/authUtils";
 import LoginPage from "../modules/auth/pages/Login/Login";
+import RegisterPage from "../modules/auth/pages/Register/Register";
 import Layout from "../modules/shared/layouts/Layout";
-import { HomePage } from "../modules/home/pages/home";
+import { HomePage } from "../modules/home/pages/Home";
 import OffersCreatePage from "../modules/offers/pages/OfferCreate/OffersCreate";
 import OfferEditPage from "../modules/offers/pages/OfferEdit/OfferEdit";
 import YourCandidaciesScreen from "../screens/company/your-candidates/YourCandidaciesScreen";
@@ -29,6 +30,14 @@ const router = createBrowserRouter([
         <LoginPage />
       </PublicRoute>
     ),
+  },
+  {
+    path: "/register",
+    element: (
+      <PublicRoute>
+        <RegisterPage />
+      </PublicRoute>
+    )
   },
   {
     path: "/",
