@@ -94,11 +94,57 @@
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Enlace de registro */
+.register-link {
+    margin-top: 30px;
+    text-align: center;
+    animation: fadeInUp 1s ease-out;
+}
+
+.register-link p {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 1rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.register-link a {
+    color: white;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-left: 8px;
+    display: inline-block;
+}
+
+.register-link a:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
+}
+
 /* Animaciones */
 @keyframes fadeInDown {
     from {
         opacity: 0;
         transform: translateY(-30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
     }
 
     to {
@@ -128,6 +174,14 @@
     .brand-header {
         margin-bottom: 30px;
     }
+
+    .register-link {
+        margin-top: 25px;
+    }
+
+    .register-link p {
+        font-size: 0.9rem;
+    }
 }
 
 @media (max-width: 480px) {
@@ -142,5 +196,18 @@
 
     .login-page {
         padding: 15px;
+    }
+
+    .register-link {
+        margin-top: 20px;
+    }
+
+    .register-link p {
+        font-size: 0.85rem;
+    }
+
+    .register-link a {
+        padding: 6px 12px;
+        font-size: 0.9rem;
     }
 }

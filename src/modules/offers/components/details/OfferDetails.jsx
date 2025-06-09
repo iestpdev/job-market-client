@@ -4,14 +4,22 @@ import UploadDocsModal from '../../../candidacies/components/UploadDocsModal/Upl
 import usePermissions from '../../../shared/hooks/usePermissions';
 import useCheckIfApplied from '../../../candidacies/hooks/useCheckIfApplied';
 import useOfferDelete from '../../hooks/useOfferDelete';
+import useStudentDetails from '../../../students/hooks/useStudentDetails';
+import { useAtomValue } from 'jotai';
+import { authAtom } from '../../../auth/atoms/authAtom';
 import './OfferDetails.css';
 
 const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [_, setCandidacyId] = useState(null);
-    const { isStudent, studentId } = usePermissions();
+    const auth = useAtomValue(authAtom);
+    const studentId = auth?.user?.studentId;
+    const { isStudent } = usePermissions();
     const { data: alreadyApplied, isLoading: checking, refetch: refetchApplied } = useCheckIfApplied(offer.ID, studentId);
+    const { student } = useStudentDetails(studentId);
+    const hasCurriculum = !!student?.CURRICULUM;
+
     const { mutate: deleteOffer, isPending } = useOfferDelete(() => {
         navigate("/");
         onDelete?.();
@@ -34,7 +42,13 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
         );
     }
 
-    const handleApply = () => setShowModal(true);
+    const handleApply = () => {
+        if (!hasCurriculum) {
+            alert("Debes tener un currículum (PDF) cargado antes de postular.");
+            return;
+        }
+        setShowModal(true);
+    };
 
     const {
         TITULO,
