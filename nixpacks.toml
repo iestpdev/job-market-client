@@ -8,4 +8,4 @@ cmds = ["npm install"]
 cmds = ["npm run build"]
 
 [phases.start]
-cmd = "npx serve -s dist -l $PORT"
+cmd = "PORT=${PORT} npx serve -s dist -l ${PORT}"
