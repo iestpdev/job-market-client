@@ -4,8 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    
-    "start:local": "serve -s dist -l 3000", 
+    "start": "serve -s dist",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
