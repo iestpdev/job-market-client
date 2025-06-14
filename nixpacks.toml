@@ -1,5 +1,4 @@
-[providers]
-caddy = false
+providers = ["node"]
 
 [phases.setup]
 nixPkgs = ["nodejs_20"]
@@ -12,4 +11,3 @@ cmds = ["npm run build"]
 
 [phases.start]
 cmd = "npx serve -s dist -l $PORT"
-
