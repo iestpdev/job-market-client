@@ -12,6 +12,8 @@ export default function StudentRegisterForm() {
         fechNac: '',
         tipoDOI: 'DNI',
         numDOI: '',
+        programaEstudio: '',
+        esEgresado: false,
         username: '',
         userpass: '',
     });
@@ -19,8 +21,9 @@ export default function StudentRegisterForm() {
     const { mutate, isPending } = useRegisterStudent(() => navigate('/login'));
 
     const handleChange = e => {
-        const { name, value } = e.target;
-        setForm(prev => ({ ...prev, [name]: value }));
+        const { name, value, type, checked } = e.target;
+        const newValue = type === 'checkbox' ? checked : value;
+        setForm(prev => ({ ...prev, [name]: newValue }));
     };
 
     const handleSubmit = e => {
@@ -33,6 +36,8 @@ export default function StudentRegisterForm() {
             <div className="student-register-card">
                 <h3 className="student-register-title">Registro de Estudiante</h3>
                 <form onSubmit={handleSubmit} className="student-register-form">
+
+                    {/* Información Personal */}
                     <div className="form-section">
                         <h4 className="section-title">Información Personal</h4>
                         <div className="form-grid">
@@ -87,6 +92,7 @@ export default function StudentRegisterForm() {
                         </div>
                     </div>
 
+                    {/* Documento de Identidad */}
                     <div className="form-section">
                         <h4 className="section-title">Documento de Identidad</h4>
                         <div className="form-grid">
@@ -115,6 +121,36 @@ export default function StudentRegisterForm() {
                         </div>
                     </div>
 
+                    {/* Información Académica */}
+                    <div className="form-section">
+                        <h4 className="section-title">Información Académica</h4>
+                        <div className="form-grid">
+                            <div className="input-group">
+                                <input
+                                    name="programaEstudio"
+                                    placeholder="Programa de Estudio"
+                                    onChange={handleChange}
+                                    value={form.programaEstudio}
+                                    className="student-input"
+                                    required
+                                />
+                            </div>
+
+                            <div className="input-group checkbox-group">
+                                <label>
+                                    <input
+                                        type="checkbox"
+                                        name="esEgresado"
+                                        checked={form.esEgresado}
+                                        onChange={handleChange}
+                                    />
+                                    ¿Egresado?
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Credenciales de Acceso */}
                     <div className="form-section">
                         <h4 className="section-title">Credenciales de Acceso</h4>
                         <div className="form-grid">
