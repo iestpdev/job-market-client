@@ -11,6 +11,8 @@ const StudentForm = ({ student, onSubmit }) => {
         fechNac: "",
         tipoDOI: "",
         numDOI: "",
+        programaEstudio: "",
+        esEgresado: false,
         curriculum: null,
     });
 
@@ -23,6 +25,8 @@ const StudentForm = ({ student, onSubmit }) => {
                 fechNac: student.FECH_NACIMIENTO?.slice(0, 10) || "",
                 tipoDOI: student.TIPO_DOI || "",
                 numDOI: student.NUM_DOI || "",
+                programaEstudio: student.PROGRAMA_ESTUDIO || "",
+                esEgresado: student.ES_EGRESADO || false,
                 curriculum: null,
             });
         }
