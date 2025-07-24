@@ -1,9 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { validateFileSize } from "../../utils/validateFileSize";
-import './StudentForm.css';
+import { useActivatedMajors } from "../../../majors/hooks/useMajors";
+import "./StudentForm.css";
 
 const StudentForm = ({ student, onSubmit }) => {
     const fileInputRef = useRef(null);
+    const { data: majors = [], isLoading: loadingMajors } = useActivatedMajors();
+
     const [form, setForm] = useState({
         apellidos: "",
         nombres: "",
@@ -11,6 +14,8 @@ const StudentForm = ({ student, onSubmit }) => {
         fechNac: "",
         tipoDOI: "",
         numDOI: "",
+        programaEstudioId: "",
+        esEgresado: false,
         curriculum: null,
     });
 
@@ -23,14 +28,16 @@ const StudentForm = ({ student, onSubmit }) => {
                 fechNac: student.FECH_NACIMIENTO?.slice(0, 10) || "",
                 tipoDOI: student.TIPO_DOI || "",
                 numDOI: student.NUM_DOI || "",
+                programaEstudioId: student.PROGRAMA_ESTUDIO_ID || "",
+                esEgresado: !!student.ES_EGRESADO,
                 curriculum: null,
             });
         }
     }, [student]);
 
     const handleChange = (e) => {
-        const { name, value } = e.target;
-        let newValue = value;
+        const { name, value, type, checked } = e.target;
+        let newValue = type === "checkbox" ? checked : value;
 
         if (name === "tipoDOI") {
             setForm((prev) => ({
@@ -67,10 +74,8 @@ const StudentForm = ({ student, onSubmit }) => {
 
         for (const key in form) {
             const value = form[key];
-
             if (value !== null && value !== undefined) {
                 if (key === "curriculum" && !(value instanceof File)) continue;
-
                 formData.append(key, value);
             }
         }
@@ -80,7 +85,7 @@ const StudentForm = ({ student, onSubmit }) => {
 
     return (
         <form onSubmit={handleSubmit} className="student-form-container">
-            <h2>Editar Perfil</h2>
+            <h2>{student ? "Editar Perfil" : "Registrar Estudiante"}</h2>
 
             <div className="student-form-group">
                 <label>Nombres:</label>
@@ -94,7 +99,7 @@ const StudentForm = ({ student, onSubmit }) => {
 
             <div className="student-form-group">
                 <label>Género:</label>
-                <select name="genero" value={form.genero} onChange={handleChange}>
+                <select name="genero" value={form.genero} onChange={handleChange} required>
                     <option value="">Seleccione</option>
                     <option value="M">Masculino</option>
                     <option value="F">Femenino</option>
@@ -108,7 +113,7 @@ const StudentForm = ({ student, onSubmit }) => {
 
             <div className="student-form-group">
                 <label>Tipo de Documento:</label>
-                <select name="tipoDOI" value={form.tipoDOI} onChange={handleChange}>
+                <select name="tipoDOI" value={form.tipoDOI} onChange={handleChange} required>
                     <option value="">Seleccione</option>
                     <option value="DNI">DNI</option>
                     <option value="CE">Carnet de extranjería</option>
@@ -125,6 +130,39 @@ const StudentForm = ({ student, onSubmit }) => {
                     required
                     placeholder={form.tipoDOI === "DNI" ? "Máx. 8 dígitos" : "Máx. 20 caracteres"}
                 />
+            </div>
+
+            <div className="student-form-group">
+                <label>Programa de Estudio:</label>
+                <select
+                    name="programaEstudioId"
+                    value={form.programaEstudioId}
+                    onChange={handleChange}
+                    required
+                >
+                    <option value="">Seleccione un programa</option>
+                    {loadingMajors ? (
+                        <option disabled>Cargando...</option>
+                    ) : (
+                        majors.map((m) => (
+                            <option key={m.ID} value={m.ID}>
+                                {m.NOMBRE}
+                            </option>
+                        ))
+                    )}
+                </select>
+            </div>
+
+            <div className="student-form-group">
+                <label>
+                    <input
+                        type="checkbox"
+                        name="esEgresado"
+                        checked={form.esEgresado}
+                        onChange={handleChange}
+                    />
+                    ¿Es egresado?
+                </label>
             </div>
 
             <div className="student-form-group">
@@ -150,7 +188,9 @@ const StudentForm = ({ student, onSubmit }) => {
                 )}
             </div>
 
-            <button type="submit" className="student-form-submit">Guardar cambios</button>
+            <button type="submit" className="student-form-submit">
+                {student ? "Guardar cambios" : "Registrar"}
+            </button>
         </form>
     );
 };
