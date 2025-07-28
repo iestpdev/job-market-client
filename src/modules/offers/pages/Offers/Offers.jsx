@@ -43,7 +43,6 @@ const OffersPage = ({ filters }) => {
     return (
         <div className="offers-page">
             <aside className="offer-list-container">
-                <h2>Ofertas de Trabajo</h2>
                 <OfferList offers={filteredOffers} onSelect={(id) => setSelectedOfferId(id)} />
             </aside>
             <main className="offer-details-container">
