@@ -6,7 +6,8 @@ import OfferDetails from "../../components/details/OfferDetails";
 import './Offers.css';
 
 const OffersPage = ({ filters }) => {
-    const { offers, loading: offersLoading, error: offersError, refetch } = useOffers();
+    const { majorId = "" } = filters || {};
+    const { offers, loading: offersLoading, error: offersError, refetch } = useOffers(majorId);
     const [filteredOffers, setFilteredOffers] = useState([]);
     const [selectedOfferId, setSelectedOfferId] = useState(null);
     const { offer, loading: detailsLoading, error: detailsError } = useOfferDetails(selectedOfferId);
