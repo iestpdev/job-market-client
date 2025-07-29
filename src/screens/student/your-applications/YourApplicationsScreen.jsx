@@ -18,7 +18,6 @@ export default function YourApplicationsScreen() {
     return (
         <div style={{ display: "flex", gap: "1rem" }}>
             <div style={{ flex: 1 }}>
-                <h1>Mis Postulaciones</h1>
                 {loading && <p>Cargando postulaciones...</p>}
                 {error && <p>{error}</p>}
                 {!loading && (
@@ -29,7 +28,6 @@ export default function YourApplicationsScreen() {
                 )}
             </div>
             <div style={{ flex: 1, borderLeft: "1px solid #ccc", paddingLeft: "1rem" }}>
-                <h1>Detalle de Oferta</h1>
                 {offerLoading && <p>Cargando detalles de la oferta...</p>}
                 {offerError && <p>{offerError}</p>}
                 {!offerLoading && offer && <OfferDetails offer={offer} showApplyBtn={false} />}

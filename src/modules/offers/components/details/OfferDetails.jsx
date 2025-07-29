@@ -127,7 +127,7 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                                 {checking
                                     ? "Verificando..."
                                     : alreadyApplied
-                                        ? "Ya has postulado"
+                                        ? "Ya haz postulado"
                                         : "Postularse ahora"}
                             </button>
 
