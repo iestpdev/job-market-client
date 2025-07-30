@@ -1,7 +1,7 @@
 import './OfferCard.css';
 
 const OfferCard = ({ offer }) => {
-    const { TITULO, RAZON_SOCIAL, DIRECCION1, SUELDO, FECHA_PUBLICACION } = offer;
+    const { TITULO, RAZON_SOCIAL, DIRECCION1, FECHA_PUBLICACION } = offer;
 
     const formatDate = (dateString) => {
         if (!dateString) return "No especificada";
