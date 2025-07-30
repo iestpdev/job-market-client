@@ -5,7 +5,7 @@ export const useActivatedMajors = () => {
     return useQuery({
         queryKey: ["majors", "activated"],
         queryFn: getAllActivated,
-        staleTime: 1000 * 60 * 10, // 10 minutos
+        staleTime: 1000 * 60 * 10,
         refetchOnWindowFocus: false
     });
 };

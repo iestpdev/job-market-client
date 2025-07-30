@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
 import { getAll, getAllByCompanyId } from "../api/offers";
+import { getAllOffersByMajorId } from "../../majors/api/majors";
 import { useAtomValue } from "jotai";
 import { authAtom } from "../../auth/atoms/authAtom";
 
-const useOffers = () => {
+const useOffers = (majorId = "") => {
     const [offers, setOffers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -12,13 +13,23 @@ const useOffers = () => {
     const fetchOffers = useCallback(async () => {
         setLoading(true);
         try {
-            let data;
+            let data = [];
+
             if (auth?.user?.companyId) {
                 data = await getAllByCompanyId(auth.user.companyId);
             } else if (auth?.user?.studentId) {
                 data = await getAll();
-            } else {
-                data = [];
+            }
+
+            // Aplicar filtro por major
+            if (majorId) {
+                const dataByMajor = await getAllOffersByMajorId(majorId);
+
+                if (auth?.user?.companyId) {
+                    data = dataByMajor.filter((o) => o.EMPRESA_ID === auth.user.companyId);
+                } else {
+                    data = dataByMajor;
+                }
             }
 
             if (!Array.isArray(data)) throw new Error("Respuesta no válida");
@@ -29,7 +40,7 @@ const useOffers = () => {
         } finally {
             setLoading(false);
         }
-    }, [auth?.user?.companyId, auth?.user?.studentId]);
+    }, [auth?.user?.companyId, auth?.user?.studentId, majorId]);
 
     useEffect(() => {
         fetchOffers();
