@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from "lucide-react";
 import useRegisterCompany from '../../../../hooks/useRegisterCompany';
 import './CompanyRegisterForm.css';
 
 export default function CompanyRegisterForm() {
     const navigate = useNavigate();
+     const [showPassword, setShowPassword] = useState(false);
+
     const [form, setForm] = useState({
         razonSocial: '',
         ruc: '',
@@ -164,12 +167,19 @@ export default function CompanyRegisterForm() {
                                 <input
                                     name="userpass"
                                     placeholder="Contraseña"
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     onChange={handleChange}
                                     value={form.userpass}
                                     className="register-input"
                                     required
                                 />
+                                 <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800 transition"
+                                >
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                </button>
                             </div>
                         </div>
                     </div>
