@@ -1,8 +1,10 @@
 import { EditorContent } from "@tiptap/react";
 import Toolbar from "../../../shared/components/tiptap/Toolbar";
+import MajorsSelector from "../../../majors/components/MajorsSelector";
 import './OfferForm.css';
 
 const OfferForm = ({
+    offerId,
     formData,
     descripcionEditor,
     requisitosEditor,
@@ -11,6 +13,7 @@ const OfferForm = ({
     handleSubmit,
     isEdit = false
 }) => {
+    console.log("OfferForm render", offerId);
     return (
         <form className="offer-form" onSubmit={handleSubmit}>
             <h2>
@@ -38,7 +41,6 @@ const OfferForm = ({
                                 checked={formData.adHonorem}
                                 onChange={handleChange}
                             />
-                            🤔
                         </label>
                     </div>
                 )}
@@ -108,6 +110,10 @@ const OfferForm = ({
                     )}
                 </div>
             </div>
+
+            {isEdit && (
+                <MajorsSelector offerId={offerId} />
+            )}
 
             <button type="submit">
                 {isEdit ? "Guardar Cambios" : "Crear Oferta"}
