@@ -103,7 +103,6 @@ export default function OfferEditPage() {
     return (
         <div className="offer-edit-container">
             <OfferForm
-                offerId={id}
                 formData={formData}
                 handleChange={handleChange}
                 handleSubmit={handleSubmit}
