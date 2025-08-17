@@ -1,6 +1,6 @@
 .status-actions-container {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     margin-top: 1.5rem;
     gap: 1rem;
 }
