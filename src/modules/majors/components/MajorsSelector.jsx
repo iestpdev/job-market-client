@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { useActivatedMajors } from "../hooks/useMajors";
 import { useMajorsByOfferId } from "../hooks/useMajorsByOfferId";
 import { useAssignMajorsToOffer } from "../hooks/useAssignMajorsToOffer";
 
-const MajorsSelector = ({ offerId }) => {
+const MajorsSelector = ({ offerId, onClose }) => {
     const { data: majors = [] } = useActivatedMajors();
     const { data: assignedMajors = [] } = useMajorsByOfferId(offerId);
     const { mutate: assignMajors, isLoading } = useAssignMajorsToOffer();
     const [selectedMajors, setSelectedMajors] = useState([]);
+    const queryClient = useQueryClient();
 
     useEffect(() => {
         if (assignedMajors.length > 0) {
@@ -22,7 +24,17 @@ const MajorsSelector = ({ offerId }) => {
     };
 
     const handleSave = () => {
-        assignMajors({ offerId, programIds: selectedMajors });
+        assignMajors(
+            { offerId, programIds: selectedMajors },
+            {
+                onSuccess: () => {
+                    // refresca chips/tags en OfferDetails
+                    queryClient.invalidateQueries({ queryKey: ["majorsByOfferId", offerId] });
+                    // cierra el modal
+                    onClose?.();
+                },
+            }
+        );
     };
 
     return (

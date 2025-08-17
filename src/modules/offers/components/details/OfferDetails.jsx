@@ -183,7 +183,7 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                             ✕
                         </button>
                         <h2 className="text-lg font-semibold mb-4">Programas de Estudio</h2>
-                        <MajorsSelector offerId={ID} />
+                        <MajorsSelector offerId={ID}  onClose={() => setShowMajorsModal(false)} />
                     </div>
                 </div>
             )}
