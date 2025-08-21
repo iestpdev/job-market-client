@@ -9,7 +9,17 @@ export default function RegisterPage() {
 
     return (
         <div className="register-page-container">
-            <h2 className="register-page-title">IESTP JOBS</h2>
+            <div className=" flex flex-col items-center mb-8">
+                <img
+                    src="/logo.png"
+                    alt="IESTP Jobs Logo"
+                    className="w-48 h-48 object-contain"
+                />
+                <p className="brand-subtitle text-gray-600 text-sm md:text-base">
+                    Portal de Empleos y Oportunidades
+                </p>
+            </div>
+
             <div className="register-page-buttons">
                 <button
                     className={`register-toggle-button ${type === 'student' ? 'active' : ''}`}
