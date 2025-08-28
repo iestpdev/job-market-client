@@ -2,7 +2,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { Link, useNavigate } from "react-router-dom";
 import { authAtom } from "../../../auth/atoms/authAtom";
 import usePermissions from "../../hooks/usePermissions";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CredentialsModal } from "../../../users/components/CredentialsModal";
 import "./Navbar.css";
 
@@ -11,14 +11,48 @@ export default function Navbar() {
     const setAuth = useSetAtom(authAtom);
     const navigate = useNavigate();
     const [dropdownOpen, setDropdownOpen] = useState(false);
-    const { canPublishOffers, canViewCandidacies, canViewPostulations, isCompany, isStudent, companyId, studentId } = usePermissions();
     const [showModal, setShowModal] = useState(false);
+
+    const {
+        canPublishOffers,
+        canViewCandidacies,
+        canViewPostulations,
+        isCompany,
+        isStudent,
+        companyId,
+        studentId,
+    } = usePermissions();
 
     const handleLogout = () => {
         localStorage.removeItem("auth");
         setAuth({ isAuthenticated: false, token: null, user: null });
         navigate("/login");
     };
+
+    // Función para cerrar el dropdown cuando se hace clic fuera
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            const avatarWrapper = document.querySelector(".navbar-avatar-wrapper");
+            const dropdownMenu = document.querySelector(".navbar-dropdown");
+
+            // Si el clic no está dentro del wrapper ni del dropdown, cierra el menú
+            if (
+                dropdownOpen &&
+                !avatarWrapper.contains(event.target) &&
+                (!dropdownMenu || !dropdownMenu.contains(event.target))
+            ) {
+                setDropdownOpen(false);
+            }
+        };
+
+        // Agregar el listener al documento
+        document.addEventListener("mousedown", handleClickOutside);
+
+        // Limpiar el listener al desmontar el componente
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, [dropdownOpen]);
 
     if (!auth.isAuthenticated) return null;
 
@@ -78,7 +112,9 @@ export default function Navbar() {
                                     Credenciales
                                 </button>
 
-                                <button onClick={handleLogout} className="dropdown-item">Cerrar sesión</button>
+                                <button onClick={handleLogout} className="dropdown-item">
+                                    Cerrar sesión
+                                </button>
                             </div>
                         )}
                     </div>
