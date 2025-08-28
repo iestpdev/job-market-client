@@ -1,10 +1,14 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from "lucide-react";
 import useRegisterStudent from '../../../../hooks/useRegisterStudent';
+import { useActivatedMajors } from '../../../../../majors/hooks/useMajors';
 import './StudentRegisterForm.css';
 
 export default function StudentRegisterForm() {
     const navigate = useNavigate();
+    const [showPassword, setShowPassword] = useState(false);
+
     const [form, setForm] = useState({
         apellidos: '',
         nombres: '',
@@ -12,12 +16,13 @@ export default function StudentRegisterForm() {
         fechNac: '',
         tipoDOI: 'DNI',
         numDOI: '',
-        programaEstudio: '',
+        programaEstudioId: '',
         esEgresado: false,
         username: '',
         userpass: '',
     });
 
+    const { data: majors = [] } = useActivatedMajors();
     const { mutate, isPending } = useRegisterStudent(() => navigate('/login'));
 
     const handleChange = e => {
@@ -126,14 +131,20 @@ export default function StudentRegisterForm() {
                         <h4 className="section-title">Información Académica</h4>
                         <div className="form-grid">
                             <div className="input-group">
-                                <input
-                                    name="programaEstudio"
-                                    placeholder="Programa de Estudio"
+                                <select
+                                    name="programaEstudioId"
                                     onChange={handleChange}
-                                    value={form.programaEstudio}
-                                    className="student-input"
+                                    value={form.programaEstudioId}
+                                    className="student-select"
                                     required
-                                />
+                                >
+                                    <option value="">Seleccionar Programa</option>
+                                    {majors.map((major) => (
+                                        <option key={major.ID} value={major.ID}>
+                                            {major.NOMBRE}
+                                        </option>
+                                    ))}
+                                </select>
                             </div>
 
                             <div className="input-group checkbox-group">
@@ -165,16 +176,23 @@ export default function StudentRegisterForm() {
                                 />
                             </div>
 
-                            <div className="input-group">
+                            <div className="input-group relative">
                                 <input
                                     name="userpass"
                                     placeholder="Contraseña"
-                                    type="password"
+                                    type={showPassword ? "text" : "password"}
                                     onChange={handleChange}
                                     value={form.userpass}
-                                    className="student-input"
+                                    className="student-input pr-10"
                                     required
                                 />
+                                <button
+                                    type="button"
+                                    onClick={() => setShowPassword(!showPassword)}
+                                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800 transition"
+                                >
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                </button>
                             </div>
                         </div>
                     </div>
