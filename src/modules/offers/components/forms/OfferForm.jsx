@@ -38,7 +38,6 @@ const OfferForm = ({
                                 checked={formData.adHonorem}
                                 onChange={handleChange}
                             />
-                            🤔
                         </label>
                     </div>
                 )}
@@ -108,7 +107,6 @@ const OfferForm = ({
                     )}
                 </div>
             </div>
-
             <button type="submit">
                 {isEdit ? "Guardar Cambios" : "Crear Oferta"}
             </button>

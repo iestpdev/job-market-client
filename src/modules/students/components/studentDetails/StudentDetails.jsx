@@ -22,14 +22,14 @@ export default function StudentDetails({ student }) {
                 <strong>Género:</strong> {GENERO === "M" ? "Masculino" : "Femenino"}
             </div>
             <div className="student-info-item">
-                <strong>Fecha de Nacimiento:</strong>{" "}
+                <strong>Fecha de Nacimiento: </strong>
                 {new Date(FECH_NACIMIENTO).toLocaleDateString("es-PE")}
             </div>
             <div className="student-info-item">
                 <strong>Documento:</strong> {TIPO_DOI} {NUM_DOI}
             </div>
             <div className="student-info-item">
-                <strong>Currículum:</strong>{" "}
+                <strong>Currículum: </strong>
                 <a href={CURRICULUM} className="curriculum-link" target="_blank" rel="noopener noreferrer">
                     Ver archivo PDF
                 </a>

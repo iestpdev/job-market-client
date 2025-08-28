@@ -7,11 +7,15 @@ import useOfferDelete from '../../hooks/useOfferDelete';
 import useStudentDetails from '../../../students/hooks/useStudentDetails';
 import { useAtomValue } from 'jotai';
 import { authAtom } from '../../../auth/atoms/authAtom';
+import MajorsSelector from '../../../majors/components/MajorsSelector';
+import MajorsTags from '../../../majors/components/MajorsTags';
+import { Pencil } from 'lucide-react';
 import './OfferDetails.css';
 
 const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
+    const [showMajorsModal, setShowMajorsModal] = useState(false); // Modal de Majors
     const [_, setCandidacyId] = useState(null);
     const auth = useAtomValue(authAtom);
     const studentId = auth?.user?.studentId;
@@ -51,6 +55,7 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
     };
 
     const {
+        ID,
         TITULO,
         RAZON_SOCIAL,
         DIRECCION1,
@@ -147,6 +152,41 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                     )}
                 </div>
             </div>
+
+
+            <div className="offer-section">
+                <h3 className="section-title mb-2">Programas de estudio</h3>
+
+                <div className="flex flex-wrap items-center gap-2">
+                    <MajorsTags offerId={ID} />
+                    {!isStudent && (
+                        <button
+                            className="flex items-center justify-center p-2 rounded-full bg-blue-600 text-white hover:bg-blue-700 transition"
+                            onClick={() => setShowMajorsModal(true)}
+                            title="Editar programas de estudio"
+                        >
+                            <Pencil size={18} />
+                        </button>
+
+                    )}
+                </div>
+            </div>
+
+            {/* Modal de MajorsSelector */}
+            {showMajorsModal && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+                    <div className="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 relative">
+                        <button
+                            onClick={() => setShowMajorsModal(false)}
+                            className="absolute top-3 right-3 text-gray-600 hover:text-gray-900"
+                        >
+                            ✕
+                        </button>
+                        <h2 className="text-lg font-semibold mb-4">Programas de Estudio</h2>
+                        <MajorsSelector offerId={ID}  onClose={() => setShowMajorsModal(false)} />
+                    </div>
+                </div>
+            )}
 
             {/* Compensación */}
             {(SUELDO || VIATICOS || BONOS) && (
