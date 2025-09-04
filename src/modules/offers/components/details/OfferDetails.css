@@ -1,3 +1,17 @@
+.offer-details .job-description ul,
+.offer-details .job-requirements ul,
+.offer-details .job-benefits ul {
+    list-style-type: disc; /* Puntos en listas no ordenadas */
+    margin-left: 20px; /* Asegura que haya un margen visible */
+}
+
+.offer-details .job-description ol,
+.offer-details .job-requirements ol,
+.offer-details .job-benefits ol {
+    list-style-type: decimal; /* Numeración en listas ordenadas */
+    margin-left: 20px;
+}
+
 .offer-details {
     background-color: var(--color-blanco);
     border-radius: 8px;
