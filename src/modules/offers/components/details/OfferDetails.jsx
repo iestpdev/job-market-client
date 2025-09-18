@@ -10,6 +10,11 @@ import { authAtom } from '../../../auth/atoms/authAtom';
 import MajorsSelector from '../../../majors/components/MajorsSelector';
 import MajorsTags from '../../../majors/components/MajorsTags';
 import { Pencil } from 'lucide-react';
+import { Bookmark } from 'lucide-react';
+import useCheckSavedOffer from '../../hooks/useCheckSavedOffer';
+import useSaveOffer from '../../hooks/useSaveOffer';
+import useDeleteSavedOffer from '../../hooks/useDeleteSavedOffer';
+import { useQueryClient } from '@tanstack/react-query';
 import './OfferDetails.css';
 
 const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
@@ -23,6 +28,18 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
     const { data: alreadyApplied, isLoading: checking, refetch: refetchApplied } = useCheckIfApplied(offer.ID, studentId);
     const { student } = useStudentDetails(studentId);
     const hasCurriculum = !!student?.CURRICULUM;
+
+    const { data: savedData, isLoading: checkingSaved } = useCheckSavedOffer(studentId, offer.ID);
+    const { mutate: saveOffer } = useSaveOffer(studentId);
+    const { mutate: removeSaved } = useDeleteSavedOffer(studentId);
+
+    const toggleSave = () => {
+        if (savedData?.exists) {
+            removeSaved({ ofertaId: offer.ID });
+        } else {
+            saveOffer({ ofertaId: offer.ID });
+        }
+    };
 
     const { mutate: deleteOffer, isPending } = useOfferDelete(() => {
         navigate("/");
@@ -122,6 +139,21 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                 )}
 
                 <div className="offer-actions">
+                    {isStudent && studentId && (
+                        <button
+                            onClick={toggleSave}
+                            disabled={checkingSaved}
+                            className="p-2 rounded-md ml-2 border border-blue-400 transition-colors duration-200 hover:bg-gray-100"
+                            title={savedData?.exists ? "Quitar de guardados" : "Guardar oferta"}
+                        >
+                            <Bookmark
+                                size={20}
+                                className={savedData?.exists ? "text-blue-700" : "text-gray-400"}
+                                fill={savedData?.exists ? "currentColor" : "none"}
+                            />
+                        </button>
+                    )}
+
                     {isStudent && studentId && showApplyBtn && (
                         <>
                             <button
@@ -183,7 +215,7 @@ const OfferDetails = ({ offer, showApplyBtn = true, onDelete }) => {
                             ✕
                         </button>
                         <h2 className="text-lg font-semibold mb-4">Programas de Estudio</h2>
-                        <MajorsSelector offerId={ID}  onClose={() => setShowMajorsModal(false)} />
+                        <MajorsSelector offerId={ID} onClose={() => setShowMajorsModal(false)} />
                     </div>
                 </div>
             )}

@@ -118,9 +118,10 @@
 /* Action Buttons */
 .offer-actions {
     display: flex;
-    flex-direction: column;
+    flex-direction: row; /* Cambiar de columna a fila */
     gap: 12px;
-    align-items: flex-end;
+    align-items: center; /* Centra ambos botones verticalmente */
+    justify-content: flex-end; /* Mantiene los botones alineados a la derecha */
 }
 
 .btn-apply {
