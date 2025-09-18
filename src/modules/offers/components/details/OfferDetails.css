@@ -196,6 +196,7 @@
 .compensation-grid {
     display: grid;
     gap: 12px;
+    max-width: 50%;
 }
 
 .compensation-item {

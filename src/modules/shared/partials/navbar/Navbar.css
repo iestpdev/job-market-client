@@ -2,7 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 1rem 2rem;
+    padding: 0 2rem;
     border-bottom: 1px solid var(--color-borde-gris);
     background-color: var(--color-blanco);
     font-family: sans-serif;
@@ -26,6 +26,12 @@
     color: var(--color-negro);
     text-decoration: none;
     font-weight: normal;
+    padding: 1rem 0;
+}
+.navbar-link:hover{
+    border-bottom: 2px solid var(--color-azul);
+    box-sizing: border-box;
+    padding: .94rem 0;
 }
 
 .navbar-link.active {
