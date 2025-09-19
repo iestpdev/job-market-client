@@ -6,9 +6,6 @@
     /* Altura completa de la ventana */
     overflow-y: auto;
     /* Scroll vertical cuando sea necesario */
-    padding: 1rem;
-    background-color: var(--color-gris-suave);
-
     /* Estilos del scrollbar para webkit browsers */
     scrollbar-width: thin;
     scrollbar-color: var(--color-borde-gris) transparent;

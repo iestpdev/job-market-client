@@ -45,12 +45,6 @@
     position: relative;
 }
 
-.student-register-title::after {
-    content: '🎓';
-    display: block;
-    font-size: 24px;
-    margin-top: 8px;
-}
 
 /* Formulario */
 .student-register-form {
