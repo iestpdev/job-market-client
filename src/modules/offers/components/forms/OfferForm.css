@@ -66,6 +66,20 @@
     min-height: 150px;
 }
 
+.tiptap-wrapper ul {
+    list-style-type: disc;
+    margin-left: 1.25rem;
+    padding-left: 1.25rem;
+}
+.tiptap-wrapper ol {
+    list-style-type: decimal;
+    margin-left: 1.25rem;
+    padding-left: 1.25rem;
+}
+.tiptap-wrapper li {
+    margin-bottom: 0.5rem;
+}
+
 .offer-form button[type="submit"] {
     margin-top: 2rem;
     padding: 0.75rem 2rem;

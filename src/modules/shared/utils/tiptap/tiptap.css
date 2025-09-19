@@ -10,3 +10,20 @@
     border-color: var(--color-azul);
     box-shadow: 0 0 0 2px rgba(3, 88, 203, 0.2);
 }
+
+.tiptap-editor ul {
+    list-style: disc;
+    margin-left: 1.25rem;
+    padding-left: 1.25rem;
+}
+
+.tiptap-editor ol {
+    list-style: decimal;
+    margin-left: 1.25rem;
+    padding-left: 1.25rem;
+}
+
+.tiptap-editor li {
+    margin: 0.25rem 0;
+}
+

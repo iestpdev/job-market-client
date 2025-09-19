@@ -80,7 +80,7 @@ const OfferForm = ({
                 <div className="form-group-full">
                     <label>Descripción:</label>
                     {descripcionEditor && (
-                        <div className="tiptap-editor">
+                        <div className="tiptap-wrapper">
                             <Toolbar editor={descripcionEditor} />
                             <EditorContent editor={descripcionEditor} />
                         </div>
@@ -90,7 +90,7 @@ const OfferForm = ({
                 <div className="form-group-full">
                     <label>Requisitos:</label>
                     {requisitosEditor && (
-                        <div className="tiptap-editor">
+                        <div className="tiptap-wrapper">
                             <Toolbar editor={requisitosEditor} />
                             <EditorContent editor={requisitosEditor} />
                         </div>
@@ -100,7 +100,7 @@ const OfferForm = ({
                 <div className="form-group-full">
                     <label>Beneficios:</label>
                     {beneficiosEditor && (
-                        <div className="tiptap-editor">
+                        <div className="tiptap-wrapper">
                             <Toolbar editor={beneficiosEditor} />
                             <EditorContent editor={beneficiosEditor} />
                         </div>
