@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from "lucide-react";
 import useRegisterStudent from '../../../../hooks/useRegisterStudent';
 import { useActivatedMajors } from '../../../../../majors/hooks/useMajors';
+import useReniec from '../../../../../../services-external/decolecta/hooks/useReniec';
 import './StudentRegisterForm.css';
 
 export default function StudentRegisterForm({ toast }) {
@@ -27,15 +28,67 @@ export default function StudentRegisterForm({ toast }) {
     const { data: majors = [] } = useActivatedMajors();
     const { mutate, isPending } = useRegisterStudent(() => navigate('/login'));
 
+    // Hook de RENIEC (solo si es DNI y 8 dígitos)
+    const { data: reniecData } = useReniec(
+        form.tipoDOI === "DNI" && form.numDOI.length === 8 ? form.numDOI : null,
+        form.tipoDOI === "DNI"
+    );
+
+    // Efecto para setear datos de RENIEC
+    useEffect(() => {
+        if (reniecData?.success && reniecData.data) {
+            const { nombres, apellido_paterno, apellido_materno, numero } = reniecData.data;
+            setForm(prev => ({
+                ...prev,
+                nombres: nombres || prev.nombres,
+                apellidos: `${apellido_paterno || ""} ${apellido_materno || ""}`.trim(),
+                correoInstitucional: `${numero}@iestpchincha.edu.pe`
+            }));
+        }
+    }, [reniecData]);
+
     const handleChange = e => {
         const { name, value, type, checked } = e.target;
         const newValue = type === 'checkbox' ? checked : value;
+
+        // Si cambia el tipo de documento
+        if (name === "tipoDOI") {
+            if (value === "CE") {
+                // Limpiar campos si es Carnet de Extranjería
+                setForm(prev => ({
+                    ...prev,
+                    tipoDOI: value,
+                    numDOI: "",
+                    apellidos: "",
+                    nombres: "",
+                    correoInstitucional: ""
+                }));
+            } else {
+                // Si es DNI, solo actualizamos tipo y limpiamos número
+                setForm(prev => ({
+                    ...prev,
+                    tipoDOI: value,
+                    numDOI: ""
+                }));
+            }
+            return;
+        }
+
         setForm(prev => ({ ...prev, [name]: newValue }));
     };
 
     const handleSubmit = e => {
         e.preventDefault();
-        mutate(form, {
+
+        const payload = {
+            ...form,
+            correo_institucional: form.correoInstitucional, // snake_case
+            fechNac: form.fechNac, // mantener camelCase
+        };
+
+        delete payload.correoInstitucional;
+
+        mutate(payload, {
             onError: (error) => {
                 toast.current.show({
                     severity: 'error',
@@ -54,6 +107,7 @@ export default function StudentRegisterForm({ toast }) {
             }
         });
     };
+
 
     return (
         <div className="student-register-container">
@@ -86,6 +140,7 @@ export default function StudentRegisterForm({ toast }) {
                                     value={form.numDOI}
                                     className="student-input"
                                     required
+                                    maxLength={form.tipoDOI === "DNI" ? 8 : 20}
                                 />
                             </div>
                         </div>
@@ -99,10 +154,11 @@ export default function StudentRegisterForm({ toast }) {
                                 <input
                                     name="apellidos"
                                     placeholder="Apellidos"
-                                    onChange={handleChange}
                                     value={form.apellidos}
+                                    onChange={handleChange}
                                     className="student-input"
                                     required
+                                    readOnly={form.tipoDOI === "DNI"} // Bloqueado si es DNI
                                 />
                             </div>
 
@@ -110,10 +166,11 @@ export default function StudentRegisterForm({ toast }) {
                                 <input
                                     name="nombres"
                                     placeholder="Nombres"
-                                    onChange={handleChange}
                                     value={form.nombres}
+                                    onChange={handleChange}
                                     className="student-input"
                                     required
+                                    readOnly={form.tipoDOI === "DNI"} // Bloqueado si es DNI
                                 />
                             </div>
 
@@ -203,10 +260,11 @@ export default function StudentRegisterForm({ toast }) {
                                     type="email"
                                     name="correoInstitucional"
                                     placeholder="Correo institucional"
-                                    onChange={handleChange}
                                     value={form.correoInstitucional}
+                                    onChange={handleChange}
                                     className="student-input"
                                     required
+                                    readOnly={form.tipoDOI === "DNI"} // Bloqueado si es DNI
                                 />
                             </div>
 

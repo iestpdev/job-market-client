@@ -1,12 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from "lucide-react";
 import useRegisterCompany from '../../../../hooks/useRegisterCompany';
+import useSunat from '../../../../../../services-external/decolecta/hooks/useSunat';
 import './CompanyRegisterForm.css';
 
 export default function CompanyRegisterForm() {
     const navigate = useNavigate();
-     const [showPassword, setShowPassword] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const [form, setForm] = useState({
         razonSocial: '',
@@ -22,6 +23,24 @@ export default function CompanyRegisterForm() {
     });
 
     const { mutate, isPending } = useRegisterCompany(() => navigate('/login'));
+
+    // Hook de RUC (solo si son 11 dígitos)
+    const { data: rucData } = useSunat(
+        form.ruc.length === 11 ? form.ruc : null,
+        form.ruc.length === 11
+    );
+
+    // Efecto para setear datos de SUNAT
+    useEffect(() => {
+        if (rucData?.success && rucData.data) {
+            const { nombre_o_razon_social, dirección_completa } = rucData.data;
+            setForm(prev => ({
+                ...prev,
+                razonSocial: nombre_o_razon_social || prev.razonSocial,
+                direccion1: dirección_completa || prev.direccion1,
+            }));
+        }
+    }, [rucData]);
 
     const handleChange = e => {
         const { name, value, files } = e.target;
@@ -55,9 +74,10 @@ export default function CompanyRegisterForm() {
                                 value={form.razonSocial}
                                 className="register-input"
                                 required
+                                readOnly={form.ruc.length === 11} // Bloqueado si viene de SUNAT
                             />
                         </div>
-                        
+
                         <div className="input-group">
                             <input
                                 name="direccion1"
@@ -66,6 +86,7 @@ export default function CompanyRegisterForm() {
                                 value={form.direccion1}
                                 className="register-input"
                                 required
+                                readOnly={form.ruc.length === 11} // Bloqueado si viene de SUNAT
                             />
                         </div>
 
@@ -77,6 +98,7 @@ export default function CompanyRegisterForm() {
                                 value={form.ruc}
                                 className="register-input"
                                 required
+                                maxLength={11}
                             />
                         </div>
 
@@ -163,17 +185,17 @@ export default function CompanyRegisterForm() {
                                 />
                             </div>
 
-                            <div className="input-group">
+                            <div className="input-group relative">
                                 <input
                                     name="userpass"
                                     placeholder="Contraseña"
                                     type={showPassword ? "text" : "password"}
                                     onChange={handleChange}
                                     value={form.userpass}
-                                    className="register-input"
+                                    className="register-input pr-10"
                                     required
                                 />
-                                 <button
+                                <button
                                     type="button"
                                     onClick={() => setShowPassword(!showPassword)}
                                     className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800 transition"
@@ -194,5 +216,5 @@ export default function CompanyRegisterForm() {
                 </form>
             </div>
         </div>
-    );
+    )
 }
