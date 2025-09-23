@@ -47,6 +47,28 @@ export default function StudentRegisterForm() {
                         <h4 className="section-title">Información Personal</h4>
                         <div className="form-grid">
                             <div className="input-group">
+                                <select
+                                    name="tipoDOI"
+                                    onChange={handleChange}
+                                    value={form.tipoDOI}
+                                    className="student-select"
+                                >
+                                    <option value="DNI">DNI</option>
+                                    <option value="CE">Carnet de Extranjería</option>
+                                </select>
+                            </div>
+
+                            <div className="input-group">
+                                <input
+                                    name="numDOI"
+                                    placeholder="Número de Documento"
+                                    onChange={handleChange}
+                                    value={form.numDOI}
+                                    className="student-input"
+                                    required
+                                />
+                            </div>
+                            <div className="input-group">
                                 <input
                                     name="apellidos"
                                     placeholder="Apellidos"
@@ -69,7 +91,6 @@ export default function StudentRegisterForm() {
                             </div>
 
                             <div className="input-group">
-                                <label className="date-label">Género</label>
                                 <select
                                     name="genero"
                                     onChange={handleChange}
@@ -91,35 +112,6 @@ export default function StudentRegisterForm() {
                                     onChange={handleChange}
                                     value={form.fechNac}
                                     className="student-input date-input"
-                                    required
-                                />
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Documento de Identidad */}
-                    <div className="form-section">
-                        <h4 className="section-title">Documento de Identidad</h4>
-                        <div className="form-grid">
-                            <div className="input-group">
-                                <select
-                                    name="tipoDOI"
-                                    onChange={handleChange}
-                                    value={form.tipoDOI}
-                                    className="student-select"
-                                >
-                                    <option value="DNI">DNI</option>
-                                    <option value="CE">Carnet de Extranjería</option>
-                                </select>
-                            </div>
-
-                            <div className="input-group">
-                                <input
-                                    name="numDOI"
-                                    placeholder="Número de Documento"
-                                    onChange={handleChange}
-                                    value={form.numDOI}
-                                    className="student-input"
                                     required
                                 />
                             </div>

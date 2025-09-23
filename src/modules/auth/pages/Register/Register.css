@@ -36,7 +36,7 @@
 
 .register-form-container {
     width: 100%;
-    max-width: 800px;
+    max-width: 100%;
 }
 
 .register-login-link a:hover {

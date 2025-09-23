@@ -34,9 +34,11 @@ export default function RegisterPage() {
                     Empresa
                 </button>
             </div>
+
             <div className="register-form-container">
                 {type === 'student' ? <StudentRegisterForm /> : <CompanyRegisterForm />}
             </div>
+            
             <div className="register-login-link">
                 <p>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>
             </div>
