@@ -1,15 +1,18 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
+import { Toast } from 'primereact/toast';
 import StudentRegisterForm from '../../components/forms/Register/student/StudentRegisterForm';
 import CompanyRegisterForm from '../../components/forms/Register/company/CompanyRegisterForm';
 import './Register.css';
 
 export default function RegisterPage() {
     const [type, setType] = useState('student');
+    const toast = useRef(null);
 
     return (
         <div className="register-page-container">
-            <div className=" flex flex-col items-center mb-8">
+            {/* Logo */}
+            <div className="flex flex-col items-center mb-8">
                 <img
                     src="/logo.png"
                     alt="IESTP Jobs Logo"
@@ -20,6 +23,7 @@ export default function RegisterPage() {
                 </p>
             </div>
 
+            {/* Botones */}
             <div className="register-page-buttons">
                 <button
                     className={`register-toggle-button ${type === 'student' ? 'active' : ''}`}
@@ -35,10 +39,17 @@ export default function RegisterPage() {
                 </button>
             </div>
 
+            {/* Toast global */}
+            <Toast ref={toast} position="top-right" />
+
+            {/* Formulario dinámico */}
             <div className="register-form-container">
-                {type === 'student' ? <StudentRegisterForm /> : <CompanyRegisterForm />}
+                {type === 'student'
+                    ? <StudentRegisterForm toast={toast} />
+                    : <CompanyRegisterForm toast={toast} />}
             </div>
-            
+
+            {/* Link login */}
             <div className="register-login-link">
                 <p>¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link></p>
             </div>

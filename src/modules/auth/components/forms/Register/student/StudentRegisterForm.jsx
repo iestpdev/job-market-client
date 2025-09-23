@@ -5,13 +5,15 @@ import useRegisterStudent from '../../../../hooks/useRegisterStudent';
 import { useActivatedMajors } from '../../../../../majors/hooks/useMajors';
 import './StudentRegisterForm.css';
 
-export default function StudentRegisterForm() {
+export default function StudentRegisterForm({ toast }) {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
 
     const [form, setForm] = useState({
         apellidos: '',
         nombres: '',
+        correoInstitucional: '',
+        telefono: '',
         genero: '',
         fechNac: '',
         tipoDOI: 'DNI',
@@ -33,18 +35,36 @@ export default function StudentRegisterForm() {
 
     const handleSubmit = e => {
         e.preventDefault();
-        mutate(form);
+        mutate(form, {
+            onError: (error) => {
+                toast.current.show({
+                    severity: 'error',
+                    summary: 'Error en el registro',
+                    detail: error?.response?.data?.message || "Ocurrió un error inesperado",
+                    life: 4000
+                });
+            },
+            onSuccess: () => {
+                toast.current.show({
+                    severity: 'success',
+                    summary: 'Registro exitoso',
+                    detail: 'Tu cuenta ha sido creada correctamente',
+                    life: 3000
+                });
+            }
+        });
     };
 
     return (
         <div className="student-register-container">
             <div className="student-register-card">
                 <h3 className="student-register-title">Registro de Estudiante</h3>
+
                 <form onSubmit={handleSubmit} className="student-register-form">
 
-                    {/* Información Personal */}
+                    {/* Documento de Identidad */}
                     <div className="form-section">
-                        <h4 className="section-title">Información Personal</h4>
+                        <h4 className="section-title">Documento de Identidad</h4>
                         <div className="form-grid">
                             <div className="input-group">
                                 <select
@@ -68,6 +88,13 @@ export default function StudentRegisterForm() {
                                     required
                                 />
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Información Personal */}
+                    <div className="form-section">
+                        <h4 className="section-title">Información Personal</h4>
+                        <div className="form-grid">
                             <div className="input-group">
                                 <input
                                     name="apellidos"
@@ -115,6 +142,20 @@ export default function StudentRegisterForm() {
                                     required
                                 />
                             </div>
+
+                            <div className="input-group">
+                                <input
+                                    type="text"
+                                    name="telefono"
+                                    placeholder="Teléfono (9 dígitos)"
+                                    onChange={handleChange}
+                                    value={form.telefono}
+                                    className="student-input"
+                                    required
+                                    maxLength={9}
+                                    pattern="\d{9}"
+                                />
+                            </div>
                         </div>
                     </div>
 
@@ -157,6 +198,18 @@ export default function StudentRegisterForm() {
                     <div className="form-section">
                         <h4 className="section-title">Credenciales de Acceso</h4>
                         <div className="form-grid">
+                            <div className="input-group">
+                                <input
+                                    type="email"
+                                    name="correoInstitucional"
+                                    placeholder="Correo institucional"
+                                    onChange={handleChange}
+                                    value={form.correoInstitucional}
+                                    className="student-input"
+                                    required
+                                />
+                            </div>
+
                             <div className="input-group">
                                 <input
                                     name="username"

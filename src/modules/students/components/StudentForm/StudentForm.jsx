@@ -10,6 +10,8 @@ const StudentForm = ({ student, onSubmit }) => {
     const [form, setForm] = useState({
         apellidos: "",
         nombres: "",
+        correoInstitucional: "",
+        telefono: "",
         genero: "",
         fechNac: "",
         tipoDOI: "",
@@ -24,6 +26,8 @@ const StudentForm = ({ student, onSubmit }) => {
             setForm({
                 apellidos: student.APELLIDOS || "",
                 nombres: student.NOMBRES || "",
+                correoInstitucional: student.CORREO_INSTITUCIONAL || "",
+                telefono: student.TELEFONO || "",
                 genero: student.GENERO || "",
                 fechNac: student.FECH_NACIMIENTO?.slice(0, 10) || "",
                 tipoDOI: student.TIPO_DOI || "",
@@ -51,6 +55,10 @@ const StudentForm = ({ student, onSubmit }) => {
         if (name === "numDOI") {
             const maxLen = form.tipoDOI === "DNI" ? 8 : 20;
             newValue = value.replace(/\D/g, "").slice(0, maxLen);
+        }
+
+        if (name === "telefono") {
+            newValue = value.replace(/\D/g, "").slice(0, 9);
         }
 
         setForm((prev) => ({ ...prev, [name]: newValue }));
@@ -95,6 +103,30 @@ const StudentForm = ({ student, onSubmit }) => {
             <div className="student-form-group">
                 <label>Apellidos:</label>
                 <input type="text" name="apellidos" value={form.apellidos} onChange={handleChange} required />
+            </div>
+
+            <div className="student-form-group">
+                <label>Correo institucional:</label>
+                <input
+                    type="email"
+                    name="correoInstitucional"
+                    value={form.correoInstitucional}
+                    onChange={handleChange}
+                    required
+                />
+            </div>
+
+            <div className="student-form-group">
+                <label>Teléfono:</label>
+                <input
+                    type="text"
+                    name="telefono"
+                    value={form.telefono}
+                    onChange={handleChange}
+                    required
+                    maxLength={9}
+                    placeholder="9 dígitos"
+                />
             </div>
 
             <div className="student-form-group">

@@ -1,1 +1,33 @@
 @import "tailwindcss";
+
+/* Cambiar fondo y borde del toast error */
+.p-toast .p-toast-message-error {
+  background: #fee2e2;  /* rojo claro */
+  border-left: 6px solid #ef4444;
+  color: #991b1b;
+  font-weight: 500;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+/* Cambiar toast success */
+.p-toast .p-toast-message-success {
+  background: #dcfce7; /* verde claro */
+  border-left: 6px solid #22c55e;
+  color: #14532d;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+/* Título y detalle */
+.p-toast .p-toast-summary {
+  font-size: 16px;
+  font-weight: 700;
+  margin-left: 10px;
+}
+
+.p-toast .p-toast-detail {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-left: 10px;
+}
